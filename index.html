@@ -1976,6 +1976,34 @@ if (ballRush) {
     launchCleanBonusRound();
   });
 }
+    let tapSequence = [];
+
+document.addEventListener('click', (e) => {
+  const x = e.clientX;
+  const y = e.clientY;
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+
+  let zone;
+
+  if (y < h * 0.3) zone = 'up';
+  else if (y > h * 0.7) zone = 'down';
+  else if (x < w * 0.3) zone = 'left';
+  else if (x > w * 0.7) zone = 'right';
+  else zone = 'center';
+
+  tapSequence.push(zone);
+
+  // keep last 10 inputs
+  tapSequence = tapSequence.slice(-10);
+
+  const correct = ['up','up','down','down','left','right','left','right','center','center'];
+
+  if (tapSequence.join(',') === correct.join(',')) {
+    launchCleanBonusRound();
+    tapSequence = [];
+  }
+});
     let logoClicks = 0;
     const brand = document.querySelector('.brand');
 
