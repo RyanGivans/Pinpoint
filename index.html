@@ -1973,15 +1973,19 @@ function launchBonusRound() {
   }, 90);
 }
 
-document.getElementById('exitBonusRound').addEventListener('click', () => {
-  const takeover = document.getElementById('bonusTakeover');
+const exitBonusRound = document.getElementById('exitBonusRound');
 
-  takeover.classList.remove('show');
-  document.body.classList.remove('bonus-active');
+if (exitBonusRound) {
+  exitBonusRound.addEventListener('click', () => {
+    const takeover = document.getElementById('bonusTakeover');
 
-  clearInterval(bonusScoreTimer);
-  document.getElementById('bonusScore').textContent = '000000';
-});
+    takeover.classList.remove('show');
+    document.body.classList.remove('bonus-active');
+
+    clearInterval(bonusScoreTimer);
+    document.getElementById('bonusScore').textContent = '000000';
+  });
+}
 
     let logoClicks = 0;
     const brand = document.querySelector('.brand');
