@@ -1689,8 +1689,9 @@ function launchCleanBonusRound() {
     <div class="clean-bonus-bg"></div>
     <div class="clean-bonus-panel">
       <div class="clean-kicker">KONAMI CODE ACCEPTED</div>
-      <h2>MULTIBALL MODE</h2>
-      <h3>BO COUNTS BONUS ROUND</h3>
+      <h2>KONAMI JACKPOT</h2>
+<h3>MULTIBALL RELEASED</h3>
+<div class="clean-ball-rush" id="cleanBallRush"></div>
       <div class="clean-score" id="cleanScore">000000</div>
       <p class="clean-line">JACKPOT • EXTRA BALL • SKILL SHOT • BASEMENT UNLOCKED</p>
       <div class="clean-prize">
@@ -1824,10 +1825,82 @@ function launchCleanBonusRound() {
     letter-spacing: .2em;
     color: #ffd166;
   }
+  .clean-bonus-panel {
+  width: min(760px, 92vw) !important;
+  max-height: 82vh !important;
+  padding: clamp(18px, 3.5vw, 38px) !important;
+}
+
+.clean-bonus-panel h2 {
+  font-size: clamp(42px, 7vw, 86px) !important;
+}
+
+.clean-bonus-panel h3 {
+  font-size: clamp(20px, 3vw, 38px) !important;
+}
+
+.clean-score {
+  font-size: clamp(40px, 7vw, 76px) !important;
+  margin: 12px auto !important;
+}
+
+.clean-prize {
+  font-size: clamp(15px, 1.8vw, 20px) !important;
+  margin: 14px auto !important;
+}
+
+.clean-line {
+  font-size: 13px !important;
+}
+
+.clean-ball-rush span {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 30% 30%, #fff, #cfd8ff 35%, #7b88ff 70%, #111);
+  box-shadow: 0 0 14px white, 0 0 26px #28d9ff;
+  z-index: 1;
+  animation: rushBall 3.8s linear infinite;
+}
+
+@keyframes rushBall {
+  from {
+    transform: translate(var(--x1), var(--y1)) scale(.6);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(var(--x2), var(--y2)) scale(1.15);
+  }
+  to {
+    transform: translate(var(--x3), var(--y3)) scale(.7);
+    opacity: 0;
+  }
+}
 `;
 
   document.head.appendChild(style);
   document.body.appendChild(overlay);
+  const ballRush = document.getElementById('cleanBallRush');
+
+if (ballRush) {
+  for (let i = 0; i < 45; i++) {
+    const ball = document.createElement('span');
+    ball.style.setProperty('--x1', `${Math.random() * 100}vw`);
+    ball.style.setProperty('--y1', `${Math.random() * 100}vh`);
+    ball.style.setProperty('--x2', `${Math.random() * 100}vw`);
+    ball.style.setProperty('--y2', `${Math.random() * 100}vh`);
+    ball.style.setProperty('--x3', `${Math.random() * 100}vw`);
+    ball.style.setProperty('--y3', `${Math.random() * 100}vh`);
+    ball.style.animationDelay = `${Math.random() * 2.5}s`;
+    ball.style.animationDuration = `${2.5 + Math.random() * 2.5}s`;
+    ballRush.appendChild(ball);
+  }
+}
   document.body.style.overflow = 'hidden';
 
   const scoreEl = document.getElementById('cleanScore');
