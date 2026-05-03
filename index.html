@@ -1241,7 +1241,8 @@
         width: calc(100% - 28px);
         font-size: 12px;
       }
-      .btn[data-jackpot]::before,
+    }
+    .btn[data-jackpot]::before,
 .nav-cta[data-jackpot]::before,
 .sticky-actions a[data-jackpot]::before {
   content: attr(data-jackpot);
@@ -1252,8 +1253,11 @@
   background: linear-gradient(135deg, var(--gold), var(--hot), var(--blue));
   color: #fff;
   z-index: 3;
-  font-weight:
-    }
+  font-weight: 1000;
+  letter-spacing: .16em;
+  border-radius: inherit;
+}
+     
       /* === KONAMI MULTIBALL TAKEOVER === */
 
 .bonus-takeover {
