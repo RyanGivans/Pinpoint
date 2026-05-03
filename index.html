@@ -1741,7 +1741,14 @@ function launchCleanBonusRound() {
     to { transform: translateX(-30%) rotate(-8deg); }
   }
 
-  .clean-bonus-bg {
+  .clean-bonus-bg
+  .clean-ball-rush {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999998;
+}
+  {
     position: absolute;
     inset: 0;
     background-image:
@@ -1763,7 +1770,7 @@ function launchCleanBonusRound() {
 
   .clean-bonus-panel {
     position: relative;
-    z-index: 2;
+    z-index: 10;
     width: min(920px, 94vw);
     padding: clamp(26px, 5vw, 60px);
     border-radius: 38px;
@@ -1861,8 +1868,8 @@ function launchCleanBonusRound() {
   pointer-events: none;
   background: radial-gradient(circle at 30% 30%, #fff, #cfd8ff 35%, #7b88ff 70%, #111);
   box-shadow: 0 0 14px white, 0 0 26px #28d9ff;
-  z-index: 1;
-  animation: rushBall 3.8s linear infinite;
+z-index: 999999;
+animation: rushBall 3.8s linear infinite;
 }
 
 @keyframes rushBall {
@@ -1888,7 +1895,7 @@ function launchCleanBonusRound() {
   const ballRush = document.getElementById('cleanBallRush');
 
 if (ballRush) {
-  for (let i = 0; i < 45; i++) {
+  for (let i = 0; i < 120; i++) {
     const ball = document.createElement('span');
     ball.style.setProperty('--x1', `${Math.random() * 100}vw`);
     ball.style.setProperty('--y1', `${Math.random() * 100}vh`);
