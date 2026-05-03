@@ -462,6 +462,308 @@
       .sticky-actions{left:12px;right:12px;flex-direction:row}
       .sticky-actions a{flex:1;text-align:center}
     }
+    /* === PINPOINT EASTER EGG UPGRADE === */
+
+.btn, .nav-cta, .sticky-actions a {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after, .nav-cta::after, .sticky-actions a::after {
+  content: "";
+  position: absolute;
+  inset: -80%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.75), transparent);
+  transform: translateX(-80%) rotate(20deg);
+  transition: .6s;
+}
+
+.btn:hover::after, .nav-cta:hover::after, .sticky-actions a:hover::after {
+  transform: translateX(80%) rotate(20deg);
+}
+
+.btn:hover, .nav-cta:hover, .sticky-actions a:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 30px rgba(255,43,214,.75), 0 0 50px rgba(39,217,255,.35);
+}
+
+.links a {
+  position: relative;
+}
+
+.links a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--hot);
+  transform: translateX(-50%) scale(.2);
+  opacity: 0;
+  box-shadow: 0 0 14px var(--hot);
+  transition: .25s;
+}
+
+.links a:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.feature, .event-card, .drink, .game-card {
+  position: relative;
+}
+
+.feature::before, .event-card::before, .drink::after, .game-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, transparent, var(--hot), var(--blue), transparent);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: .35;
+  pointer-events: none;
+  animation: borderChase 4s linear infinite;
+}
+
+@keyframes borderChase {
+  0% { filter: hue-rotate(0deg); opacity:.25; }
+  50% { opacity:.8; }
+  100% { filter: hue-rotate(360deg); opacity:.25; }
+}
+
+.drink {
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: .5s;
+}
+
+.drink.flipped {
+  transform: rotateY(180deg);
+}
+
+.drink.flipped h3,
+.drink.flipped p {
+  transform: rotateY(180deg);
+}
+
+.pick-drink {
+  margin: 0 0 24px;
+}
+
+.drink.highlight {
+  outline: 3px solid var(--gold);
+  box-shadow: 0 0 40px rgba(255,209,102,.65);
+}
+
+.token-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 12px var(--gold);
+  animation: fadeToken .7s forwards;
+}
+
+@keyframes fadeToken {
+  to { transform: scale(0); opacity: 0; }
+}
+
+.tilt-warning {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(80px, 18vw, 240px);
+  font-weight: 1000;
+  color: #ff2525;
+  background: rgba(0,0,0,.72);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 30px red;
+}
+
+.tilt-warning.show {
+  animation: tiltFlash .65s ease;
+}
+
+@keyframes tiltFlash {
+  0%,100% { opacity: 0; }
+  20%,80% { opacity: 1; }
+}
+
+body.tilt {
+  animation: shake .35s linear;
+}
+
+@keyframes shake {
+  0%,100% { transform: translate(0); }
+  20% { transform: translate(-12px, 6px); }
+  40% { transform: translate(10px, -8px); }
+  60% { transform: translate(-8px, -5px); }
+  80% { transform: translate(9px, 5px); }
+}
+
+.bo-mode-banner {
+  position: fixed;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-140px);
+  z-index: 9999;
+  padding: 16px 26px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--hot), var(--blue));
+  font-weight: 1000;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  box-shadow: 0 0 40px rgba(255,43,214,.75);
+  transition: .45s;
+}
+
+.bo-mode-banner.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+body.bo-mode {
+  filter: saturate(1.35) contrast(1.08);
+}
+
+.secret-token {
+  position: fixed;
+  left: 18px;
+  bottom: 26px;
+  z-index: 80;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,209,102,.8);
+  background: radial-gradient(circle, #fff3a2, #f5a900);
+  color: transparent;
+  box-shadow: 0 0 18px var(--gold);
+  cursor: pointer;
+}
+
+.bonus-message {
+  position: fixed;
+  left: 22px;
+  bottom: 62px;
+  z-index: 90;
+  background: rgba(0,0,0,.85);
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  padding: 18px;
+  color: white;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition: .3s;
+}
+
+.bonus-message.show {
+  opacity: 1;
+  transform: none;
+}
+
+.extra-ball {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%) translateY(120px);
+  z-index: 90;
+  padding: 15px 24px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: #09020b;
+  color: var(--gold);
+  font-weight: 1000;
+  letter-spacing: .15em;
+  cursor: pointer;
+  transition: .35s;
+  box-shadow: 0 0 25px rgba(255,209,102,.45);
+}
+
+.extra-ball.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+.red-door-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,0,70,.18), rgba(0,0,0,.95));
+  z-index: 99998;
+  display: none;
+  place-items: center;
+}
+
+.red-door-overlay.show {
+  display: grid;
+}
+
+.red-door {
+  width: min(320px, 80vw);
+  height: 520px;
+  background: linear-gradient(90deg, #390006, #a50021, #420006);
+  border: 8px solid #160004;
+  border-radius: 8px;
+  box-shadow: 0 0 80px rgba(255,0,80,.75);
+  position: relative;
+  animation: doorOpen .9s ease forwards;
+}
+
+@keyframes doorOpen {
+  from { transform: perspective(700px) rotateY(0); }
+  to { transform: perspective(700px) rotateY(-13deg); }
+}
+
+.red-door button {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 20px;
+  border-radius: 999px;
+  border: 1px solid white;
+  background: black;
+  color: white;
+  font-weight: 900;
+}
+
+.bo-graffiti {
+  position: absolute;
+  right: 8%;
+  bottom: 14%;
+  color: rgba(255,43,214,.28);
+  font-size: 28px;
+  font-weight: 900;
+  transform: rotate(-9deg);
+  text-shadow: 0 0 18px rgba(255,43,214,.4);
+}
+
+.achievement {
+  position: fixed;
+  right: 20px;
+  top: 100px;
+  z-index: 9999;
+  background: rgba(0,0,0,.86);
+  border: 1px solid var(--gold);
+  color: white;
+  padding: 16px 20px;
+  border-radius: 18px;
+  transform: translateX(140%);
+  transition: .4s;
+  box-shadow: 0 0 30px rgba(255,209,102,.35);
+}
+
+.achievement.show {
+  transform: translateX(0);
+}
   </style>
 </head>
 <body>
@@ -704,5 +1006,26 @@
          #050106`;
     });
   </script>
+  <div class="tilt-warning" id="tiltWarning">TILT</div>
+
+<div class="bo-mode-banner" id="boModeBanner">
+  BO MODE UNLOCKED • BONUS BALL ACTIVE
+</div>
+
+<button class="secret-token" id="secretToken" title="Bonus Ball">●</button>
+
+<div class="bonus-message" id="bonusMessage">
+  <strong>BONUS BALL</strong><br>
+  Bo Counts says: one more game.
+</div>
+
+<button class="extra-ball" id="extraBall">EXTRA BALL</button>
+
+<div class="red-door-overlay" id="redDoorOverlay">
+  <div class="red-door">
+    <div class="door-glow"></div>
+    <button id="closeDoor">ENTER PINPOINT</button>
+  </div>
+</div>
 </body>
 </html>
