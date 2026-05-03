@@ -1510,6 +1510,42 @@
 body.bonus-active {
   overflow: hidden;
 }
+    .secret-prize {
+  max-width: 760px;
+  margin: 24px auto 28px;
+  padding: 20px 24px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,209,102,.55);
+  background: rgba(255,209,102,.10);
+  color: #fff7d6;
+  font-size: clamp(18px, 2.3vw, 28px);
+  line-height: 1.35;
+  box-shadow: 0 0 38px rgba(255,209,102,.22);
+}
+
+.secret-prize strong {
+  color: var(--gold);
+  text-shadow: 0 0 18px rgba(255,209,102,.75);
+}
+
+.bonus-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+
+#exitBonusRound {
+  background: linear-gradient(135deg, var(--gold), var(--hot));
+  color: #fff;
+  box-shadow: 0 0 34px rgba(255,209,102,.55);
+}
+
+#bonusRestart {
+  background: rgba(255,255,255,.10);
+}
   </style>
 </head>
 
@@ -1843,15 +1879,21 @@ body.bonus-active {
   </div>
 
   <div class="bonus-panel">
-    <div class="bonus-kicker">KONAMI CODE ACCEPTED</div>
-    <h2>MULTIBALL MODE</h2>
-    <h3>BO COUNTS BONUS ROUND</h3>
+  <div class="bonus-kicker">KONAMI CODE ACCEPTED</div>
+  <h2>MULTIBALL MODE</h2>
+  <h3>BO COUNTS BONUS ROUND</h3>
 
-    <div class="bonus-score" id="bonusScore">000000</div>
+  <div class="bonus-score" id="bonusScore">000000</div>
 
-    <p>JACKPOT • EXTRA BALL • SKILL SHOT • BASEMENT UNLOCKED</p>
+  <p>JACKPOT • EXTRA BALL • SKILL SHOT • BASEMENT UNLOCKED</p>
 
+  <div class="secret-prize">
+    You found the secret. Say <strong>“Konami Code Jackpot”</strong> to the bartender for <strong>10 free gameplay tokens.</strong>
+  </div>
+
+  <div class="bonus-actions">
     <button class="btn" id="exitBonusRound">Exit Bonus Round</button>
+    <button class="btn secondary" id="bonusRestart">Run It Again</button>
   </div>
 </div>
   <div class="red-door-overlay" id="redDoorOverlay">
@@ -1990,7 +2032,15 @@ if (exitBonusRound) {
     document.getElementById('bonusScore').textContent = '000000';
   });
 }
+const bonusRestart = document.getElementById('bonusRestart');
 
+if (bonusRestart) {
+  bonusRestart.addEventListener('click', () => {
+    clearInterval(bonusScoreTimer);
+    document.getElementById('bonusScore').textContent = '000000';
+    launchBonusRound();
+  });
+}
     let logoClicks = 0;
     const brand = document.querySelector('.brand');
 
