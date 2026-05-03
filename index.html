@@ -1241,6 +1241,18 @@
         width: calc(100% - 28px);
         font-size: 12px;
       }
+      .btn[data-jackpot]::before,
+.nav-cta[data-jackpot]::before,
+.sticky-actions a[data-jackpot]::before {
+  content: attr(data-jackpot);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--gold), var(--hot), var(--blue));
+  color: #fff;
+  z-index: 3;
+  font-weight:
     }
   </style>
 </head>
@@ -1706,8 +1718,15 @@
     }
 
     closeDoor.addEventListener('click', () => {
-      redDoorOverlay.classList.remove('show');
-    });
+  redDoorOverlay.classList.remove('show');
+  showBanner('WELCOME TO THE BASEMENT');
+  document.body.classList.add('bo-mode');
+
+  document.querySelector('#cocktails').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+});
 
     setInterval(() => {
       const buttons = [...document.querySelectorAll('.btn, .nav-cta, .sticky-actions a')];
@@ -1718,11 +1737,11 @@
       }
 
       randomButton.style.boxShadow = '0 0 45px rgba(255,209,102,.95), 0 0 70px rgba(255,43,214,.6)';
-      randomButton.textContent = randomButton.dataset.originalText + ' JACKPOT';
+      randomButton.setAttribute('data-jackpot', 'JACKPOT');
 
       setTimeout(() => {
         randomButton.style.boxShadow = '';
-        randomButton.textContent = randomButton.dataset.originalText;
+        randomButton.removeAttribute('data-jackpot');
       }, 1600);
     }, 9500);
 
