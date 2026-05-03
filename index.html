@@ -1577,6 +1577,74 @@ body.bonus-active {
   position: relative;
   z-index: 100001 !important;
 }
+    /* === HARD FIX: KONAMI BONUS SCREEN === */
+#bonusTakeover {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px !important;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,43,214,.85), transparent 28%),
+    radial-gradient(circle at 80% 30%, rgba(40,217,255,.75), transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(255,209,102,.55), transparent 34%),
+    #050106 !important;
+  overflow: hidden !important;
+}
+
+#bonusTakeover.show {
+  display: flex !important;
+}
+
+#bonusTakeover .bonus-panel {
+  position: relative !important;
+  z-index: 2147483001 !important;
+  width: min(920px, 94vw) !important;
+  max-height: 88vh !important;
+  overflow-y: auto !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  padding: clamp(24px, 5vw, 58px) !important;
+  text-align: center !important;
+  border-radius: 36px !important;
+  border: 2px solid rgba(255,255,255,.35) !important;
+  background: rgba(0,0,0,.86) !important;
+  box-shadow:
+    0 0 60px rgba(255,43,214,.8),
+    0 0 100px rgba(40,217,255,.5),
+    inset 0 0 40px rgba(255,255,255,.08) !important;
+}
+
+#bonusTakeover .bonus-panel h2,
+#bonusTakeover .bonus-panel h3,
+#bonusTakeover .bonus-panel p,
+#bonusTakeover .bonus-panel div,
+#bonusTakeover .bonus-panel button {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#bonusTakeover .bonus-panel h2 {
+  font-size: clamp(48px, 10vw, 120px) !important;
+}
+
+#bonusTakeover .bonus-lights,
+#bonusTakeover .bonus-balls,
+#bonusTakeover::before,
+#bonusTakeover::after {
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+#exitBonusRound,
+#bonusRestart {
+  z-index: 2147483002 !important;
+  position: relative !important;
+}
   </style>
 </head>
 
@@ -2029,19 +2097,18 @@ function launchBonusRound() {
   const takeover = document.getElementById('bonusTakeover');
   const score = document.getElementById('bonusScore');
 
+  if (!takeover || !score) return;
+
   takeover.classList.add('show');
   document.body.classList.add('bonus-active', 'bo-mode');
 
   let currentScore = 0;
-
   clearInterval(bonusScoreTimer);
 
   bonusScoreTimer = setInterval(() => {
     currentScore += Math.floor(Math.random() * 88000) + 12000;
 
-    if (currentScore > 999999) {
-      currentScore = 999999;
-    }
+    if (currentScore > 999999) currentScore = 999999;
 
     score.textContent = String(currentScore).padStart(6, '0');
 
