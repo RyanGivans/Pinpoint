@@ -1,1 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pinpoint Fayetteville | Cocktails, Pinball & Skee-Ball</title>
+  <meta name="description" content="Cocktails, craft beer, pinball, skee-ball and darts in a historic basement bar in downtown Fayetteville, Arkansas.">
+  <style>
+    :root{
+      --bg:#050106;
+      --ink:#fff8ef;
+      --muted:#bba9c8;
+      --hot:#ff2bd6;
+      --blue:#27d9ff;
+      --gold:#ffd166;
+      --lime:#b9ff38;
+      --glass:rgba(255,255,255,.08);
+      --line:rgba(255,255,255,.16);
+      --brick:
+        linear-gradient(335deg, rgba(0,0,0,.22) 23px, transparent 23px),
+        linear-gradient(155deg, rgba(0,0,0,.22) 23px, transparent 23px),
+        linear-gradient(335deg, rgba(0,0,0,.22) 23px, transparent 23px),
+        linear-gradient(155deg, rgba(0,0,0,.22) 23px, transparent 23px);
+    }
 
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 20% 5%, rgba(255,43,214,.28), transparent 32%),
+        radial-gradient(circle at 80% 15%, rgba(39,217,255,.22), transparent 34%),
+        radial-gradient(circle at 50% 80%, rgba(255,209,102,.12), transparent 38%),
+        #050106;
+      color:var(--ink);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:radial-gradient(circle at center, black, transparent 72%);
+      z-index:1;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(rgba(255,255,255,.035) 50%, rgba(0,0,0,.035) 50%);
+      background-size:100% 4px;
+      mix-blend-mode:overlay;
+      z-index:999;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{width:min(1180px, calc(100% - 36px));margin:auto;position:relative;z-index:2}
+
+    .nav{
+      position:fixed;
+      top:16px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(1180px, calc(100% - 28px));
+      z-index:50;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(8,3,13,.66);
+      backdrop-filter:blur(18px);
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+    }
+
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .brand img{width:46px;height:46px;object-fit:contain;filter:drop-shadow(0 0 18px var(--hot))}
+    .links{display:flex;gap:20px;font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#f3ddff}
+    .links a:hover{color:var(--hot)}
+    .nav-cta,.btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border-radius:999px;
+      padding:13px 18px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:12px;
+      background:linear-gradient(135deg, var(--hot), #7d2cff 48%, var(--blue));
+      color:white;
+      box-shadow:0 0 24px rgba(255,43,214,.45), inset 0 0 14px rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.28);
+    }
+
+    .hero{
+      min-height:100vh;
+      display:grid;
+      align-items:center;
+      padding:140px 0 80px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.025), rgba(255,255,255,.015)),
+        var(--brick);
+      background-color:#170812;
+      background-size:58px 58px;
+      opacity:.58;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background:
+        conic-gradient(from 90deg at 50% 50%, transparent, rgba(255,43,214,.18), transparent, rgba(39,217,255,.18), transparent);
+      animation:spin 18s linear infinite;
+      opacity:.65;
+    }
+
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:44px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      color:var(--gold);
+      font-weight:900;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    h1{
+      font-size:clamp(58px, 9vw, 132px);
+      line-height:.82;
+      margin:0;
+      letter-spacing:-.08em;
+      text-transform:uppercase;
+      text-shadow:0 0 30px rgba(255,43,214,.34);
+    }
+
+    .neon{
+      color:transparent;
+      -webkit-text-stroke:1px rgba(255,255,255,.8);
+      text-shadow:0 0 16px var(--hot), 0 0 36px rgba(255,43,214,.65);
+    }
+
+    .hero p{
+      max-width:640px;
+      color:#e7d8ee;
+      font-size:clamp(18px, 2vw, 24px);
+      line-height:1.5;
+      margin:26px 0 34px;
+    }
+
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+    .btn.secondary{
+      background:rgba(255,255,255,.08);
+      box-shadow:none;
+      border:1px solid rgba(255,255,255,.22);
+    }
+
+    .machine-stack{
+      position:relative;
+      min-height:580px;
+      perspective:1200px;
+    }
+
+    .polaroid{
+      position:absolute;
+      width:260px;
+      padding:10px 10px 38px;
+      background:#f9f1e7;
+      color:#150613;
+      box-shadow:0 30px 80px rgba(0,0,0,.62);
+      transform:rotate(var(--r)) translateY(var(--y));
+      border-radius:4px;
+      animation:float 6s ease-in-out infinite;
+    }
+
+    .polaroid img{height:240px;width:100%;object-fit:cover}
+    .polaroid span{position:absolute;bottom:10px;left:14px;font-weight:900;font-size:13px}
+    .p1{left:4%;top:4%;--r:-9deg;--y:0}
+    .p2{right:6%;top:18%;--r:8deg;--y:18px;animation-delay:.7s}
+    .p3{left:25%;bottom:2%;--r:2deg;--y:-8px;animation-delay:1.4s}
+    @keyframes float{50%{translate:0 -18px}}
+
+    .scorebar{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-top:50px;
+    }
+
+    .score{
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.035));
+      backdrop-filter:blur(12px);
+    }
+    .score strong{display:block;font-size:28px;color:var(--gold)}
+    .score span{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.12em}
+
+    section{padding:105px 0;position:relative}
+    .section-title{font-size:clamp(42px, 6vw, 78px);line-height:.92;margin:0 0 18px;letter-spacing:-.055em;text-transform:uppercase}
+    .section-intro{max-width:760px;color:#d8c8e3;font-size:19px;line-height:1.65;margin:0 0 38px}
+
+    .experience{
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,43,214,.18), transparent 30%),
+        radial-gradient(circle at 80% 30%, rgba(39,217,255,.13), transparent 28%),
+        #08020a;
+    }
+
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feature{
+      min-height:330px;
+      border-radius:34px;
+      overflow:hidden;
+      position:relative;
+      border:1px solid var(--line);
+      background:#111;
+      box-shadow:0 24px 70px rgba(0,0,0,.42);
+    }
+    .feature img{width:100%;height:100%;object-fit:cover;filter:saturate(1.2) contrast(1.08)}
+    .feature::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 20%, rgba(0,0,0,.88))}
+    .feature-content{position:absolute;bottom:0;left:0;right:0;padding:26px;z-index:2}
+    .feature h3{font-size:26px;margin:0 0 8px;text-transform:uppercase}
+    .feature p{margin:0;color:#e4d7e9;line-height:1.5}
+
+    .games{
+      background:
+        linear-gradient(180deg, #08020a, #130514 50%, #050106);
+    }
+
+    .game-marquee{
+      display:flex;
+      gap:18px;
+      overflow:hidden;
+      mask-image:linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+      margin:34px 0 22px;
+    }
+
+    .game-track{
+      display:flex;
+      gap:18px;
+      animation:slide 38s linear infinite;
+    }
+
+    @keyframes slide{to{transform:translateX(-50%)}}
+
+    .game-card{
+      min-width:220px;
+      border-radius:20px;
+      background:rgba(255,255,255,.08);
+      border:1px solid var(--line);
+      padding:10px;
+      box-shadow:0 18px 50px rgba(0,0,0,.45);
+    }
+    .game-card img{height:220px;width:100%;object-fit:cover;border-radius:14px}
+    .game-card h4{margin:12px 6px 4px;text-transform:uppercase;font-size:15px}
+
+    .cocktails{
+      background:
+        radial-gradient(circle at 70% 0%, rgba(255,43,214,.18), transparent 30%),
+        radial-gradient(circle at 20% 70%, rgba(255,209,102,.12), transparent 34%),
+        #09030b;
+    }
+
+    .menu-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+
+    .drink{
+      padding:24px;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.035));
+      position:relative;
+      overflow:hidden;
+    }
+
+    .drink::before{
+      content:"";
+      position:absolute;
+      width:110px;height:110px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,43,214,.5), transparent 70%);
+      right:-35px;top:-35px;
+    }
+    .drink h3{margin:0 0 8px;font-size:24px;text-transform:uppercase}
+    .drink p{margin:0;color:#decfe5;line-height:1.5}
+
+    .events{
+      background:#050106;
+    }
+
+    .events-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .event-card{
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.07);
+      box-shadow:0 24px 70px rgba(0,0,0,.45);
+    }
+    .event-card img{width:100%;height:260px;object-fit:cover}
+    .event-card div{padding:28px}
+    .event-card h3{font-size:30px;margin:0 0 10px;text-transform:uppercase}
+    .event-card p{color:#dccde4;line-height:1.6;margin:0 0 20px}
+
+    .basement{
+      background:
+        linear-gradient(rgba(5,1,6,.86), rgba(5,1,6,.92)),
+        var(--brick);
+      background-color:#210c13;
+      background-size:62px 62px;
+    }
+
+    .split{display:grid;grid-template-columns:.9fr 1.1fr;gap:42px;align-items:center}
+    .glass-panel{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.075);
+      border-radius:38px;
+      padding:34px;
+      box-shadow:inset 0 0 40px rgba(255,255,255,.035), 0 30px 80px rgba(0,0,0,.4);
+    }
+    .glass-panel p{color:#e2d1eb;line-height:1.75;font-size:18px}
+
+    .token-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    .token{
+      border:1px solid rgba(255,209,102,.5);
+      color:var(--gold);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      background:rgba(255,209,102,.08);
+    }
+
+    .contact{
+      background:
+        radial-gradient(circle at 80% 15%, rgba(39,217,255,.18), transparent 32%),
+        #08020a;
+    }
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .info-card{
+      border:1px solid var(--line);
+      border-radius:32px;
+      padding:30px;
+      background:rgba(255,255,255,.075);
+    }
+    .info-card h3{font-size:24px;margin:0 0 12px;text-transform:uppercase}
+    .info-card p,.info-card li{color:#ddd0e8;line-height:1.7}
+    .info-card ul{padding-left:18px}
+
+    .map{
+      min-height:420px;
+      border-radius:32px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(rgba(5,1,6,.1), rgba(5,1,6,.62)),
+        url("Images/pinpoint-logo.jpg") center/cover;
+      display:grid;
+      place-items:end start;
+      padding:28px;
+      box-shadow:0 24px 70px rgba(0,0,0,.45);
+    }
+
+    .map-badge{
+      background:rgba(0,0,0,.72);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:20px;
+      backdrop-filter:blur(12px);
+      max-width:380px;
+    }
+
+    footer{
+      padding:52px 0 94px;
+      border-top:1px solid var(--line);
+      background:#030104;
+    }
+    .footer-grid{display:flex;justify-content:space-between;gap:22px;align-items:center}
+    .footer-logo{display:flex;align-items:center;gap:16px}
+    .footer-logo img{width:70px;filter:drop-shadow(0 0 18px var(--hot))}
+    .footer-links{display:flex;gap:14px;flex-wrap:wrap;color:#d9c7e4;font-size:13px;text-transform:uppercase;letter-spacing:.13em}
+
+    .sticky-actions{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:60;
+      display:flex;
+      gap:10px;
+      flex-direction:column;
+    }
+
+    .sticky-actions a{
+      padding:13px 16px;
+      border-radius:999px;
+      background:rgba(8,3,13,.82);
+      border:1px solid var(--line);
+      backdrop-filter:blur(16px);
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      box-shadow:0 12px 34px rgba(0,0,0,.35);
+    }
+
+    .reveal{opacity:0;transform:translateY(24px);transition:all .75s ease}
+    .reveal.show{opacity:1;transform:none}
+
+    @media(max-width:900px){
+      .links{display:none}
+      .hero-grid,.split,.contact-grid,.events-grid,.menu-grid{grid-template-columns:1fr}
+      .machine-stack{min-height:520px}
+      .scorebar,.feature-grid{grid-template-columns:1fr 1fr}
+      .footer-grid{display:grid}
+    }
+
+    @media(max-width:560px){
+      .nav{top:10px;border-radius:24px}
+      .brand span{display:none}
+      .hero{padding-top:120px}
+      .scorebar,.feature-grid{grid-template-columns:1fr}
+      .polaroid{width:205px}
+      .polaroid img{height:190px}
+      .p2{right:0;top:28%}
+      .p3{left:10%;bottom:6%}
+      .sticky-actions{left:12px;right:12px;flex-direction:row}
+      .sticky-actions a{flex:1;text-align:center}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="brand" href="#home">
+      <img src="Images/pinpoint-logo.jpg" alt="Pinpoint Fayetteville logo">
+      <span>Pinpoint</span>
+    </a>
+    <div class="links">
+      <a href="#games">Games</a>
+      <a href="#cocktails">Cocktails</a>
+      <a href="#events">League</a>
+      <a href="#visit">Visit</a>
+    </div>
+    <a class="nav-cta" href="tel:4799353298">Call</a>
+  </nav>
+
+  <div class="sticky-actions">
+    <a href="https://www.google.com/maps/search/?api=1&query=23+North+Block+Avenue+Fayetteville+AR" target="_blank">Directions</a>
+    <a href="#cocktails">Menu</a>
+  </div>
+
+  <header class="hero" id="home">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Underground on Block Street • Fayetteville, Arkansas</div>
+        <h1>Craft<br><span class="neon">Cocktails</span><br>& Pinball</h1>
+        <p>A neon-lit basement bar built for late-night rounds, house cocktails, local beer, tokens, tournaments, skee-ball, darts, and one more game before you leave.</p>
+        <div class="hero-actions">
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&query=23+North+Block+Avenue+Fayetteville+AR" target="_blank">Find the Red Door</a>
+          <a class="btn secondary" href="#games">See the Lineup</a>
+        </div>
+        <div class="scorebar">
+          <div class="score"><strong>21+</strong><span>Normal Hours</span></div>
+          <div class="score"><strong>Tokens</strong><span>At the Bar</span></div>
+          <div class="score"><strong>IFPA</strong><span>Ranked Play</span></div>
+          <div class="score"><strong>No Fee</strong><span>Just Play</span></div>
+        </div>
+      </div>
+
+      <div class="machine-stack">
+        <div class="polaroid p1"><img src="Images/godzilla.png" alt="Godzilla pinball machine"><span>Godzilla</span></div>
+        <div class="polaroid p2"><img src="Images/lord-of-the-ring.png" alt="Lord of the Rings pinball machine"><span>Lord of the Rings</span></div>
+        <div class="polaroid p3"><img src="Images/harry-potter.png" alt="Harry Potter pinball machine"><span>Harry Potter</span></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="experience" id="experience">
+    <div class="wrap">
+      <h2 class="section-title reveal">The Basement Has a Pulse</h2>
+      <p class="section-intro reveal">Pinpoint feels like a secret arcade hiding under downtown Fayetteville: brick, blacklight, polished cocktails, glowing backglass, ringing bells, and that perfect low-ceiling energy that makes the whole night feel louder.</p>
+
+      <div class="feature-grid">
+        <article class="feature reveal">
+          <img src="Images/skee-ball.jpg" alt="Skee-ball at Pinpoint">
+          <div class="feature-content">
+            <h3>Skee-Ball</h3>
+            <p>Classic arcade competition with a drink in hand and the whole table watching the last roll.</p>
+          </div>
+        </article>
+
+        <article class="feature reveal">
+          <img src="Images/weekly-league-play.avif" alt="Weekly league play">
+          <div class="feature-content">
+            <h3>League Night</h3>
+            <p>Weekly matchups, fast rounds, and a room full of players chasing the next high score.</p>
+          </div>
+        </article>
+
+        <article class="feature reveal">
+          <img src="Images/sunday-ranked-play.avif" alt="Sunday ranked pinball play">
+          <div class="feature-content">
+            <h3>Ranked Play</h3>
+            <p>Second Sunday IFPA tournament energy for players ready to put scores on the board.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="games" id="games">
+    <div class="wrap">
+      <h2 class="section-title reveal">Current Lineup Energy</h2>
+      <p class="section-intro reveal">Machines rotate, favorites return, and every corner has a different soundtrack of flippers, ramps, bumpers, and jackpots.</p>
+    </div>
+
+    <div class="game-marquee">
+      <div class="game-track">
+        <div class="game-card"><img src="Images/addams-family.png" alt="Addams Family pinball"><h4>Addams Family</h4></div>
+        <div class="game-card"><img src="Images/Cactus-canyon.png" alt="Cactus Canyon pinball"><h4>Cactus Canyon</h4></div>
+        <div class="game-card"><img src="Images/creature-from-the-black-lagoon.png" alt="Creature from the Black Lagoon pinball"><h4>Creature</h4></div>
+        <div class="game-card"><img src="Images/evil-dead.png" alt="Evil Dead pinball"><h4>Evil Dead</h4></div>
+        <div class="game-card"><img src="Images/funhouse.png" alt="FunHouse pinball"><h4>FunHouse</h4></div>
+        <div class="game-card"><img src="Images/jurrasic-park.png" alt="Jurassic Park pinball"><h4>Jurassic Park</h4></div>
+        <div class="game-card"><img src="Images/scooby-do.png" alt="Scooby-Doo pinball"><h4>Scooby-Doo</h4></div>
+        <div class="game-card"><img src="Images/star-wars.png" alt="Star Wars pinball"><h4>Star Wars</h4></div>
+
+        <div class="game-card"><img src="Images/addams-family.png" alt="Addams Family pinball"><h4>Addams Family</h4></div>
+        <div class="game-card"><img src="Images/Cactus-canyon.png" alt="Cactus Canyon pinball"><h4>Cactus Canyon</h4></div>
+        <div class="game-card"><img src="Images/creature-from-the-black-lagoon.png" alt="Creature from the Black Lagoon pinball"><h4>Creature</h4></div>
+        <div class="game-card"><img src="Images/evil-dead.png" alt="Evil Dead pinball"><h4>Evil Dead</h4></div>
+        <div class="game-card"><img src="Images/funhouse.png" alt="FunHouse pinball"><h4>FunHouse</h4></div>
+        <div class="game-card"><img src="Images/jurrasic-park.png" alt="Jurassic Park pinball"><h4>Jurassic Park</h4></div>
+        <div class="game-card"><img src="Images/scooby-do.png" alt="Scooby-Doo pinball"><h4>Scooby-Doo</h4></div>
+        <div class="game-card"><img src="Images/star-wars.png" alt="Star Wars pinball"><h4>Star Wars</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cocktails" id="cocktails">
+    <div class="wrap">
+      <h2 class="section-title reveal">House Cocktails With Arcade Names</h2>
+      <p class="section-intro reveal">Fresh juice, premium spirits, house ingredients, local beer, and cocktails that feel right at home beside a glowing playfield.</p>
+
+      <div class="menu-grid">
+        <div class="drink reveal"><h3>Cool Stachio Bro</h3><p>Mezcal, rum, pistachio, pandan, honey, lime, and egg white.</p></div>
+        <div class="drink reveal"><h3>Sucker Punch</h3><p>Crown apple, Midori, lemon, soda, and a sour powder rim.</p></div>
+        <div class="drink reveal"><h3>Red Rabbit</h3><p>400 Conejos mezcal, strawberry, lime, and balsamic.</p></div>
+        <div class="drink reveal"><h3>Two to Mango</h3><p>Salted vanilla vodka, mandarin, mango, coconut-rice orgeat, Bumbu, lime, and Thai basil.</p></div>
+        <div class="drink reveal"><h3>Pinpoint Old Fashioned</h3><p>Built with Pinpoint’s barrel pick of Jeppson’s single barrel cask strength bourbon.</p></div>
+        <div class="drink reveal"><h3>Seasonal Espresso Martini</h3><p>A rotating espresso martini built around the current house flavor.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="events" id="events">
+    <div class="wrap">
+      <h2 class="section-title reveal">Play for the Board</h2>
+      <p class="section-intro reveal">Casual games any night, league play on Wednesdays, and ranked IFPA tournament play every second Sunday of the month.</p>
+
+      <div class="events-grid">
+        <article class="event-card reveal">
+          <img src="Images/weekly-league-play.avif" alt="Weekly League Play">
+          <div>
+            <h3>Weekly League Play</h3>
+            <p>Wednesday league nights start at 7:30pm with competitive rounds, prizes, and playoff energy.</p>
+            <a class="btn" href="https://www.facebook.com/pinpointfayar" target="_blank">Follow Updates</a>
+          </div>
+        </article>
+
+        <article class="event-card reveal">
+          <img src="Images/sunday-ranked-play.avif" alt="Sunday Ranked Play">
+          <div>
+            <h3>Sunday Ranked Play</h3>
+            <p>Second Sunday IFPA tournament play where scores count toward state, regional, and national standings.</p>
+            <a class="btn secondary" href="https://www.ifpapinball.com" target="_blank">IFPA Info</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="basement" id="story">
+    <div class="wrap split">
+      <div>
+        <h2 class="section-title reveal">Look for the Red Door</h2>
+      </div>
+      <div class="glass-panel reveal">
+        <p>Downstairs on North Block Avenue, Pinpoint brings together the best parts of an arcade, a cocktail bar, and a late-night downtown hideout. Start a tab, grab house tokens at the bar, pick a machine, and let the room take over.</p>
+        <div class="token-row">
+          <span class="token">Cocktails</span>
+          <span class="token">Craft Beer</span>
+          <span class="token">Pinball</span>
+          <span class="token">Skee-Ball</span>
+          <span class="token">Darts</span>
+          <span class="token">House Tokens</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="visit">
+    <div class="wrap">
+      <h2 class="section-title reveal">Visit Pinpoint</h2>
+      <p class="section-intro reveal">A downtown Fayetteville basement bar at 23 North Block Avenue. No admission fee. Games run on house tokens purchased at the bar.</p>
+
+      <div class="contact-grid">
+        <div class="map reveal">
+          <div class="map-badge">
+            <h3>23 North Block Avenue</h3>
+            <p>Fayetteville, AR 72701<br>Look for the red door.</p>
+            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=23+North+Block+Avenue+Fayetteville+AR" target="_blank">Open Map</a>
+          </div>
+        </div>
+
+        <div class="info-card reveal">
+          <h3>Details</h3>
+          <ul>
+            <li>Phone: <a href="tel:4799353298">479-935-3298</a></li>
+            <li>Normal entry is 21+.</li>
+            <li>Games range from 50¢ to $1 depending on the machine.</li>
+            <li>Tokens are purchased at the bar.</li>
+            <li>Downtown parking is available nearby, including the municipal lot behind Pinpoint.</li>
+          </ul>
+          <br>
+          <a class="btn secondary" href="https://www.facebook.com/pinpointfayar/photos" target="_blank">See Photos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div class="footer-logo">
+        <img src="Images/logo2.avif" alt="Pinpoint neon logo">
+        <div>
+          <strong>PINPOINT FAYETTEVILLE</strong><br>
+          <span style="color:#bfaed0">Cocktails • Pinball • Skee-Ball • Darts</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#games">Games</a>
+        <a href="#cocktails">Menu</a>
+        <a href="#events">League</a>
+        <a href="#visit">Visit</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.addEventListener('mousemove', (e) => {
+      document.body.style.background =
+        `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(255,43,214,.16), transparent 18%),
+         radial-gradient(circle at 20% 5%, rgba(255,43,214,.28), transparent 32%),
+         radial-gradient(circle at 80% 15%, rgba(39,217,255,.22), transparent 34%),
+         radial-gradient(circle at 50% 80%, rgba(255,209,102,.12), transparent 38%),
+         #050106`;
+    });
+  </script>
+</body>
+</html>
