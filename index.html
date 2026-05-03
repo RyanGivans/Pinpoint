@@ -3,782 +3,1263 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Pinpoint Fayetteville | Cocktails, Pinball & Skee-Ball</title>
-  <meta name="description" content="Cocktails, craft beer, pinball, skee-ball and darts in a historic basement bar in downtown Fayetteville, Arkansas.">
+  <meta name="description" content="Pinpoint Fayetteville is an underground cocktail and pinball bar on Block Street in downtown Fayetteville, Arkansas.">
+
   <style>
-    :root{
-      --bg:#050106;
-      --ink:#fff8ef;
-      --muted:#bba9c8;
-      --hot:#ff2bd6;
-      --blue:#27d9ff;
-      --gold:#ffd166;
-      --lime:#b9ff38;
-      --glass:rgba(255,255,255,.08);
-      --line:rgba(255,255,255,.16);
+    :root {
+      --bg: #050106;
+      --bg2: #100315;
+      --ink: #fff8ef;
+      --muted: #cbb9d6;
+      --hot: #ff2bd6;
+      --blue: #28d9ff;
+      --gold: #ffd166;
+      --green: #b9ff38;
+      --red: #ff214f;
+      --glass: rgba(255,255,255,.075);
+      --line: rgba(255,255,255,.16);
+      --shadow: 0 30px 90px rgba(0,0,0,.55);
       --brick:
-        linear-gradient(335deg, rgba(0,0,0,.22) 23px, transparent 23px),
-        linear-gradient(155deg, rgba(0,0,0,.22) 23px, transparent 23px),
-        linear-gradient(335deg, rgba(0,0,0,.22) 23px, transparent 23px),
-        linear-gradient(155deg, rgba(0,0,0,.22) 23px, transparent 23px);
+        linear-gradient(335deg, rgba(0,0,0,.24) 23px, transparent 23px),
+        linear-gradient(155deg, rgba(0,0,0,.24) 23px, transparent 23px),
+        linear-gradient(335deg, rgba(0,0,0,.24) 23px, transparent 23px),
+        linear-gradient(155deg, rgba(0,0,0,.24) 23px, transparent 23px);
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 20% 5%, rgba(255,43,214,.28), transparent 32%),
-        radial-gradient(circle at 80% 15%, rgba(39,217,255,.22), transparent 34%),
-        radial-gradient(circle at 50% 80%, rgba(255,209,102,.12), transparent 38%),
+        radial-gradient(circle at 18% 8%, rgba(255,43,214,.26), transparent 34%),
+        radial-gradient(circle at 82% 12%, rgba(40,217,255,.18), transparent 34%),
+        radial-gradient(circle at 60% 85%, rgba(255,209,102,.10), transparent 38%),
         #050106;
-      color:var(--ink);
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      overflow-x:hidden;
+      overflow-x: hidden;
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.18;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .16;
       background-image:
         linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
-      background-size:42px 42px;
-      mask-image:radial-gradient(circle at center, black, transparent 72%);
-      z-index:1;
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black, transparent 78%);
     }
 
-    body::after{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(rgba(255,255,255,.035) 50%, rgba(0,0,0,.035) 50%);
-      background-size:100% 4px;
-      mix-blend-mode:overlay;
-      z-index:999;
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      background: linear-gradient(rgba(255,255,255,.035) 50%, rgba(0,0,0,.035) 50%);
+      background-size: 100% 4px;
+      mix-blend-mode: overlay;
     }
 
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .wrap{width:min(1180px, calc(100% - 36px));margin:auto;position:relative;z-index:2}
-
-    .nav{
-      position:fixed;
-      top:16px;
-      left:50%;
-      transform:translateX(-50%);
-      width:min(1180px, calc(100% - 28px));
-      z-index:50;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:12px 14px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:rgba(8,3,13,.66);
-      backdrop-filter:blur(18px);
-      box-shadow:0 20px 60px rgba(0,0,0,.45);
+    img {
+      max-width: 100%;
+      display: block;
     }
 
-    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
-    .brand img{width:46px;height:46px;object-fit:contain;filter:drop-shadow(0 0 18px var(--hot))}
-    .links{display:flex;gap:20px;font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#f3ddff}
-    .links a:hover{color:var(--hot)}
-    .nav-cta,.btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      border-radius:999px;
-      padding:13px 18px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      font-size:12px;
-      background:linear-gradient(135deg, var(--hot), #7d2cff 48%, var(--blue));
-      color:white;
-      box-shadow:0 0 24px rgba(255,43,214,.45), inset 0 0 14px rgba(255,255,255,.18);
-      border:1px solid rgba(255,255,255,.28);
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .hero{
-      min-height:100vh;
-      display:grid;
-      align-items:center;
-      padding:140px 0 80px;
-      position:relative;
-      overflow:hidden;
+    button {
+      font: inherit;
     }
 
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
+    .wrap {
+      width: min(1180px, calc(100% - 38px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 28px));
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(8,3,13,.72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 1000;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(255,43,214,.75));
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #f3ddff;
+    }
+
+    .links a {
+      position: relative;
+      opacity: .92;
+      transition: .25s;
+    }
+
+    .links a:hover {
+      color: var(--hot);
+      opacity: 1;
+    }
+
+    .links a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -12px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--hot);
+      transform: translateX(-50%) scale(.2);
+      opacity: 0;
+      box-shadow: 0 0 14px var(--hot);
+      transition: .25s;
+    }
+
+    .links a:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .btn,
+    .nav-cta,
+    .sticky-actions a {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-weight: 1000;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-size: 12px;
+      color: white;
+      border: 1px solid rgba(255,255,255,.24);
+      background: linear-gradient(135deg, var(--hot), #7d2cff 48%, var(--blue));
+      box-shadow: 0 0 24px rgba(255,43,214,.44), inset 0 0 14px rgba(255,255,255,.18);
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,.08);
+      box-shadow: none;
+      border: 1px solid rgba(255,255,255,.24);
+    }
+
+    .btn::after,
+    .nav-cta::after,
+    .sticky-actions a::after {
+      content: "";
+      position: absolute;
+      inset: -80%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,.75), transparent);
+      transform: translateX(-90%) rotate(20deg);
+      transition: .65s;
+    }
+
+    .btn:hover::after,
+    .nav-cta:hover::after,
+    .sticky-actions a:hover::after {
+      transform: translateX(90%) rotate(20deg);
+    }
+
+    .btn:hover,
+    .nav-cta:hover,
+    .sticky-actions a:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 0 30px rgba(255,43,214,.72), 0 0 54px rgba(40,217,255,.35);
+    }
+
+    .sticky-actions {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 80;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sticky-actions a {
+      background: rgba(8,3,13,.84);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding: 130px 0 88px;
+      position: relative;
+      overflow: hidden;
       background:
-        linear-gradient(rgba(255,255,255,.025), rgba(255,255,255,.015)),
+        linear-gradient(120deg, rgba(255,43,214,.18), transparent 42%),
+        linear-gradient(295deg, rgba(40,217,255,.18), transparent 48%),
         var(--brick);
-      background-color:#170812;
-      background-size:58px 58px;
-      opacity:.58;
+      background-color: #160817;
+      background-size: auto, auto, 58px 58px;
     }
 
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:-20%;
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -18%;
       background:
-        conic-gradient(from 90deg at 50% 50%, transparent, rgba(255,43,214,.18), transparent, rgba(39,217,255,.18), transparent);
-      animation:spin 18s linear infinite;
-      opacity:.65;
+        conic-gradient(from 90deg at 50% 50%, transparent, rgba(255,43,214,.18), transparent, rgba(40,217,255,.18), transparent);
+      opacity: .6;
+      animation: spin 22s linear infinite;
     }
 
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:44px;
-      align-items:center;
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(5,1,6,.82), rgba(5,1,6,.48) 48%, rgba(5,1,6,.82)),
+        radial-gradient(circle at 70% 20%, rgba(255,255,255,.10), transparent 26%);
+      pointer-events: none;
     }
 
-    .eyebrow{
-      color:var(--gold);
-      font-weight:900;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      font-size:13px;
-      margin-bottom:18px;
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
-    h1{
-      font-size:clamp(58px, 9vw, 132px);
-      line-height:.82;
-      margin:0;
-      letter-spacing:-.08em;
-      text-transform:uppercase;
-      text-shadow:0 0 30px rgba(255,43,214,.34);
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 42px;
+      align-items: center;
+      position: relative;
+      z-index: 3;
     }
 
-    .neon{
-      color:transparent;
-      -webkit-text-stroke:1px rgba(255,255,255,.8);
-      text-shadow:0 0 16px var(--hot), 0 0 36px rgba(255,43,214,.65);
+    .eyebrow {
+      color: var(--gold);
+      font-weight: 1000;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 18px;
     }
 
-    .hero p{
-      max-width:640px;
-      color:#e7d8ee;
-      font-size:clamp(18px, 2vw, 24px);
-      line-height:1.5;
-      margin:26px 0 34px;
+    h1 {
+      margin: 0;
+      font-size: clamp(56px, 8.8vw, 124px);
+      line-height: .82;
+      letter-spacing: -.08em;
+      text-transform: uppercase;
+      text-shadow: 0 0 30px rgba(255,43,214,.34);
     }
 
-    .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
-    .btn.secondary{
-      background:rgba(255,255,255,.08);
-      box-shadow:none;
-      border:1px solid rgba(255,255,255,.22);
+    .neon {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,.82);
+      text-shadow: 0 0 16px var(--hot), 0 0 38px rgba(255,43,214,.66);
     }
 
-    .machine-stack{
-      position:relative;
-      min-height:580px;
-      perspective:1200px;
+    .hero p {
+      max-width: 640px;
+      margin: 26px 0 34px;
+      color: #ecddf4;
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 1.5;
     }
 
-    .polaroid{
-      position:absolute;
-      width:260px;
-      padding:10px 10px 38px;
-      background:#f9f1e7;
-      color:#150613;
-      box-shadow:0 30px 80px rgba(0,0,0,.62);
-      transform:rotate(var(--r)) translateY(var(--y));
-      border-radius:4px;
-      animation:float 6s ease-in-out infinite;
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
     }
 
-    .polaroid img{height:240px;width:100%;object-fit:cover}
-    .polaroid span{position:absolute;bottom:10px;left:14px;font-weight:900;font-size:13px}
-    .p1{left:4%;top:4%;--r:-9deg;--y:0}
-    .p2{right:6%;top:18%;--r:8deg;--y:18px;animation-delay:.7s}
-    .p3{left:25%;bottom:2%;--r:2deg;--y:-8px;animation-delay:1.4s}
-    @keyframes float{50%{translate:0 -18px}}
-
-    .scorebar{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      margin-top:50px;
+    .scorebar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 34px;
+      max-width: 620px;
     }
 
-    .score{
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:20px;
-      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.035));
-      backdrop-filter:blur(12px);
+    .score {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.04));
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.22);
     }
-    .score strong{display:block;font-size:28px;color:var(--gold)}
-    .score span{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.12em}
 
-    section{padding:105px 0;position:relative}
-    .section-title{font-size:clamp(42px, 6vw, 78px);line-height:.92;margin:0 0 18px;letter-spacing:-.055em;text-transform:uppercase}
-    .section-intro{max-width:760px;color:#d8c8e3;font-size:19px;line-height:1.65;margin:0 0 38px}
+    .score strong {
+      display: block;
+      color: var(--gold);
+      font-size: 28px;
+      line-height: 1;
+    }
 
-    .experience{
+    .score span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .machine-stack {
+      position: relative;
+      min-height: 575px;
+      perspective: 1200px;
+    }
+
+    .polaroid {
+      position: absolute;
+      width: 260px;
+      padding: 10px 10px 38px;
+      border-radius: 4px;
+      color: #150613;
+      background: #f9f1e7;
+      box-shadow: 0 30px 80px rgba(0,0,0,.62);
+      transform: rotate(var(--r));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .polaroid span {
+      position: absolute;
+      bottom: 10px;
+      left: 14px;
+      font-size: 13px;
+      font-weight: 1000;
+    }
+
+    .p1 { left: 5%; top: 6%; --r: -9deg; }
+    .p2 { right: 8%; top: 17%; --r: 8deg; animation-delay: .8s; }
+    .p3 { left: 25%; bottom: 3%; --r: 2deg; animation-delay: 1.4s; }
+
+    @keyframes float {
+      50% { translate: 0 -18px; }
+    }
+
+    .plunger-wrap {
+      position: absolute;
+      left: 4%;
+      bottom: 7%;
+      width: 90px;
+      height: 160px;
+      z-index: 4;
+      pointer-events: none;
+      opacity: .78;
+    }
+
+    .plunger {
+      position: absolute;
+      left: 26px;
+      bottom: 0;
+      width: 18px;
+      height: 112px;
+      border-radius: 999px;
+      background: linear-gradient(#ff2bd6, #28d9ff);
+      box-shadow: 0 0 25px rgba(255,43,214,.75);
+      animation: plungerPull 3s infinite;
+    }
+
+    .pinball {
+      position: absolute;
+      left: 25px;
+      bottom: 92px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 25px white, 0 0 45px #28d9ff;
+      animation: pinballLaunch 3s infinite;
+    }
+
+    @keyframes plungerPull {
+      0%, 45%, 100% { transform: translateY(0); }
+      30% { transform: translateY(38px); }
+    }
+
+    @keyframes pinballLaunch {
+      0%, 40% { transform: translate(0,0) scale(1); opacity: 1; }
+      72% { transform: translate(55vw,-26vh) scale(.75); opacity: 1; }
+      100% { transform: translate(66vw,-38vh) scale(.25); opacity: 0; }
+    }
+
+    section {
+      position: relative;
+      padding: 105px 0;
+      overflow: hidden;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: .92;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+    }
+
+    .section-intro {
+      max-width: 780px;
+      margin: 0 0 38px;
+      color: #d8c8e3;
+      font-size: 19px;
+      line-height: 1.65;
+    }
+
+    .experience {
       background:
         radial-gradient(circle at 15% 20%, rgba(255,43,214,.18), transparent 30%),
-        radial-gradient(circle at 80% 30%, rgba(39,217,255,.13), transparent 28%),
+        radial-gradient(circle at 80% 30%, rgba(40,217,255,.13), transparent 28%),
         #08020a;
     }
 
-    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .feature{
-      min-height:330px;
-      border-radius:34px;
-      overflow:hidden;
-      position:relative;
-      border:1px solid var(--line);
-      background:#111;
-      box-shadow:0 24px 70px rgba(0,0,0,.42);
-    }
-    .feature img{width:100%;height:100%;object-fit:cover;filter:saturate(1.2) contrast(1.08)}
-    .feature::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 20%, rgba(0,0,0,.88))}
-    .feature-content{position:absolute;bottom:0;left:0;right:0;padding:26px;z-index:2}
-    .feature h3{font-size:26px;margin:0 0 8px;text-transform:uppercase}
-    .feature p{margin:0;color:#e4d7e9;line-height:1.5}
-
-    .games{
-      background:
-        linear-gradient(180deg, #08020a, #130514 50%, #050106);
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
-    .game-marquee{
-      display:flex;
-      gap:18px;
-      overflow:hidden;
-      mask-image:linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
-      margin:34px 0 22px;
+    .feature {
+      min-height: 350px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid var(--line);
+      background: #111;
+      box-shadow: var(--shadow);
     }
 
-    .game-track{
-      display:flex;
-      gap:18px;
-      animation:slide 38s linear infinite;
+    .feature img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.2) contrast(1.08);
+      transition: transform .7s ease;
     }
 
-    @keyframes slide{to{transform:translateX(-50%)}}
-
-    .game-card{
-      min-width:220px;
-      border-radius:20px;
-      background:rgba(255,255,255,.08);
-      border:1px solid var(--line);
-      padding:10px;
-      box-shadow:0 18px 50px rgba(0,0,0,.45);
+    .feature:hover img {
+      transform: scale(1.08);
     }
-    .game-card img{height:220px;width:100%;object-fit:cover;border-radius:14px}
-    .game-card h4{margin:12px 6px 4px;text-transform:uppercase;font-size:15px}
 
-    .cocktails{
+    .feature::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 20%, rgba(0,0,0,.88));
+      z-index: 1;
+    }
+
+    .feature-content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
+      padding: 28px;
+    }
+
+    .feature h3 {
+      margin: 0 0 8px;
+      font-size: 27px;
+      text-transform: uppercase;
+    }
+
+    .feature p {
+      margin: 0;
+      color: #e4d7e9;
+      line-height: 1.5;
+    }
+
+    .games {
+      background: linear-gradient(180deg, #08020a, #130514 50%, #050106);
+    }
+
+    .game-marquee {
+      display: flex;
+      gap: 18px;
+      overflow: hidden;
+      margin: 34px 0 22px;
+      mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    }
+
+    .game-track {
+      display: flex;
+      gap: 18px;
+      animation: slide 42s linear infinite;
+    }
+
+    @keyframes slide {
+      to { transform: translateX(-50%); }
+    }
+
+    .game-card {
+      position: relative;
+      min-width: 220px;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      transition: .25s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .game-card img {
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .game-card h4 {
+      margin: 12px 6px 4px;
+      text-transform: uppercase;
+      font-size: 15px;
+    }
+
+    .cocktails {
       background:
         radial-gradient(circle at 70% 0%, rgba(255,43,214,.18), transparent 30%),
         radial-gradient(circle at 20% 70%, rgba(255,209,102,.12), transparent 34%),
         #09030b;
     }
 
-    .menu-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:16px;
+    .menu-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
     }
 
-    .drink{
-      padding:24px;
-      border-radius:28px;
-      border:1px solid var(--line);
-      background:linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.035));
-      position:relative;
-      overflow:hidden;
+    .pick-drink {
+      margin-bottom: 10px;
+      border: 0;
     }
 
-    .drink::before{
-      content:"";
-      position:absolute;
-      width:110px;height:110px;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(255,43,214,.5), transparent 70%);
-      right:-35px;top:-35px;
-    }
-    .drink h3{margin:0 0 8px;font-size:24px;text-transform:uppercase}
-    .drink p{margin:0;color:#decfe5;line-height:1.5}
-
-    .events{
-      background:#050106;
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
-    .events-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .event-card{
-      border-radius:34px;
-      overflow:hidden;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.07);
-      box-shadow:0 24px 70px rgba(0,0,0,.45);
+    .drink {
+      min-height: 210px;
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.035));
+      cursor: pointer;
+      transition: transform .45s ease, box-shadow .35s ease, border-color .35s ease;
+      transform-style: preserve-3d;
     }
-    .event-card img{width:100%;height:260px;object-fit:cover}
-    .event-card div{padding:28px}
-    .event-card h3{font-size:30px;margin:0 0 10px;text-transform:uppercase}
-    .event-card p{color:#dccde4;line-height:1.6;margin:0 0 20px}
 
-    .basement{
+    .drink::before {
+      content: "";
+      position: absolute;
+      width: 112px;
+      height: 112px;
+      right: -35px;
+      top: -35px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,43,214,.5), transparent 70%);
+      pointer-events: none;
+    }
+
+    .drink h3 {
+      position: relative;
+      margin: 0 0 8px;
+      font-size: 23px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .drink p {
+      position: relative;
+      margin: 0;
+      color: #decfe5;
+      line-height: 1.55;
+    }
+
+    .drink small {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--gold);
+      font-weight: 900;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .drink:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 35px rgba(255,43,214,.22);
+      border-color: rgba(255,255,255,.28);
+    }
+
+    .drink.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .drink.flipped h3,
+    .drink.flipped p,
+    .drink.flipped small {
+      transform: rotateY(180deg);
+    }
+
+    .drink.highlight {
+      outline: 3px solid var(--gold);
+      box-shadow: 0 0 42px rgba(255,209,102,.62);
+    }
+
+    .events {
+      background: #050106;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .event-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.07);
+      box-shadow: var(--shadow);
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .event-card div {
+      padding: 28px;
+    }
+
+    .event-card h3 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      text-transform: uppercase;
+    }
+
+    .event-card p {
+      margin: 0 0 20px;
+      color: #dccde4;
+      line-height: 1.6;
+    }
+
+    .basement {
       background:
         linear-gradient(rgba(5,1,6,.86), rgba(5,1,6,.92)),
         var(--brick);
-      background-color:#210c13;
-      background-size:62px 62px;
+      background-color: #210c13;
+      background-size: auto, 62px 62px;
+      overflow: hidden;
     }
 
-    .split{display:grid;grid-template-columns:.9fr 1.1fr;gap:42px;align-items:center}
-    .glass-panel{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.075);
-      border-radius:38px;
-      padding:34px;
-      box-shadow:inset 0 0 40px rgba(255,255,255,.035), 0 30px 80px rgba(0,0,0,.4);
-    }
-    .glass-panel p{color:#e2d1eb;line-height:1.75;font-size:18px}
-
-    .token-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-    .token{
-      border:1px solid rgba(255,209,102,.5);
-      color:var(--gold);
-      padding:10px 14px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      background:rgba(255,209,102,.08);
+    .bo-graffiti {
+      position: absolute;
+      right: 8%;
+      top: 22%;
+      z-index: 2;
+      color: rgba(255,43,214,.28);
+      font-size: 28px;
+      font-weight: 1000;
+      transform: rotate(-9deg);
+      text-shadow: 0 0 18px rgba(255,43,214,.4);
+      pointer-events: none;
     }
 
-    .contact{
+    .split {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .glass-panel {
+      border: 1px solid var(--line);
+      border-radius: 38px;
+      padding: 34px;
+      background: rgba(255,255,255,.075);
+      box-shadow: inset 0 0 40px rgba(255,255,255,.035), 0 30px 80px rgba(0,0,0,.4);
+    }
+
+    .glass-panel p {
+      color: #e2d1eb;
+      line-height: 1.75;
+      font-size: 18px;
+    }
+
+    .token-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .token {
+      border: 1px solid rgba(255,209,102,.5);
+      color: var(--gold);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 1000;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      background: rgba(255,209,102,.08);
+    }
+
+    .contact {
       background:
-        radial-gradient(circle at 80% 15%, rgba(39,217,255,.18), transparent 32%),
+        radial-gradient(circle at 80% 15%, rgba(40,217,255,.18), transparent 32%),
         #08020a;
     }
 
-    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .info-card{
-      border:1px solid var(--line);
-      border-radius:32px;
-      padding:30px;
-      background:rgba(255,255,255,.075);
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
     }
-    .info-card h3{font-size:24px;margin:0 0 12px;text-transform:uppercase}
-    .info-card p,.info-card li{color:#ddd0e8;line-height:1.7}
-    .info-card ul{padding-left:18px}
 
-    .map{
-      min-height:420px;
-      border-radius:32px;
-      overflow:hidden;
-      border:1px solid var(--line);
+    .map-card {
+      min-height: 430px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      border: 1px solid var(--line);
       background:
-        linear-gradient(rgba(5,1,6,.1), rgba(5,1,6,.62)),
-        url("images/pinpoint-logo.jpg") center/cover;
-      display:grid;
-      place-items:end start;
-      padding:28px;
-      box-shadow:0 24px 70px rgba(0,0,0,.45);
+        linear-gradient(rgba(5,1,6,.25), rgba(5,1,6,.78)),
+        var(--brick);
+      background-color: #260910;
+      background-size: auto, 62px 62px;
+      box-shadow: var(--shadow);
+      display: grid;
+      place-items: end start;
+      padding: 28px;
+      cursor: pointer;
     }
 
-    .map-badge{
-      background:rgba(0,0,0,.72);
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:20px;
-      backdrop-filter:blur(12px);
-      max-width:380px;
+    .map-card::before {
+      content: "RED DOOR";
+      position: absolute;
+      right: 24px;
+      top: 26px;
+      font-weight: 1000;
+      letter-spacing: .18em;
+      color: rgba(255,255,255,.16);
+      font-size: 38px;
+      transform: rotate(90deg);
+      transform-origin: right top;
     }
 
-    footer{
-      padding:52px 0 94px;
-      border-top:1px solid var(--line);
-      background:#030104;
-    }
-    .footer-grid{display:flex;justify-content:space-between;gap:22px;align-items:center}
-    .footer-logo{display:flex;align-items:center;gap:16px}
-    .footer-logo img{width:70px;filter:drop-shadow(0 0 18px var(--hot))}
-    .footer-links{display:flex;gap:14px;flex-wrap:wrap;color:#d9c7e4;font-size:13px;text-transform:uppercase;letter-spacing:.13em}
-
-    .sticky-actions{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      z-index:60;
-      display:flex;
-      gap:10px;
-      flex-direction:column;
+    .map-card::after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 330px;
+      right: 74px;
+      bottom: 0;
+      border-radius: 16px 16px 0 0;
+      background: linear-gradient(90deg, #350006, #b00022, #3f0007);
+      box-shadow: 0 0 70px rgba(255,0,80,.42);
+      opacity: .72;
     }
 
-    .sticky-actions a{
-      padding:13px 16px;
-      border-radius:999px;
-      background:rgba(8,3,13,.82);
-      border:1px solid var(--line);
-      backdrop-filter:blur(16px);
-      font-size:12px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      box-shadow:0 12px 34px rgba(0,0,0,.35);
+    .map-badge {
+      position: relative;
+      z-index: 2;
+      max-width: 390px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 20px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(12px);
     }
 
-    .reveal{opacity:0;transform:translateY(24px);transition:all .75s ease}
-    .reveal.show{opacity:1;transform:none}
-
-    @media(max-width:900px){
-      .links{display:none}
-      .hero-grid,.split,.contact-grid,.events-grid,.menu-grid{grid-template-columns:1fr}
-      .machine-stack{min-height:520px}
-      .scorebar,.feature-grid{grid-template-columns:1fr 1fr}
-      .footer-grid{display:grid}
+    .map-badge h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
     }
 
-    @media(max-width:560px){
-      .nav{top:10px;border-radius:24px}
-      .brand span{display:none}
-      .hero{padding-top:120px}
-      .scorebar,.feature-grid{grid-template-columns:1fr}
-      .polaroid{width:205px}
-      .polaroid img{height:190px}
-      .p2{right:0;top:28%}
-      .p3{left:10%;bottom:6%}
-      .sticky-actions{left:12px;right:12px;flex-direction:row}
-      .sticky-actions a{flex:1;text-align:center}
+    .map-badge p {
+      color: #e8d8f0;
     }
-    /* === PINPOINT EASTER EGG UPGRADE === */
 
-.btn, .nav-cta, .sticky-actions a {
-  position: relative;
-  overflow: hidden;
-}
+    .info-card {
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 30px;
+      background: rgba(255,255,255,.075);
+    }
 
-.btn::after, .nav-cta::after, .sticky-actions a::after {
-  content: "";
-  position: absolute;
-  inset: -80%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,.75), transparent);
-  transform: translateX(-80%) rotate(20deg);
-  transition: .6s;
-}
+    .info-card h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
 
-.btn:hover::after, .nav-cta:hover::after, .sticky-actions a:hover::after {
-  transform: translateX(80%) rotate(20deg);
-}
+    .info-card p,
+    .info-card li {
+      color: #ddd0e8;
+      line-height: 1.7;
+    }
 
-.btn:hover, .nav-cta:hover, .sticky-actions a:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 0 30px rgba(255,43,214,.75), 0 0 50px rgba(39,217,255,.35);
-}
+    .info-card ul {
+      padding-left: 18px;
+    }
 
-.links a {
-  position: relative;
-}
+    footer {
+      padding: 52px 0 100px;
+      border-top: 1px solid var(--line);
+      background: #030104;
+    }
 
-.links a::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -12px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--hot);
-  transform: translateX(-50%) scale(.2);
-  opacity: 0;
-  box-shadow: 0 0 14px var(--hot);
-  transition: .25s;
-}
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
 
-.links a:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
-}
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
 
-.feature, .event-card, .drink, .game-card {
-  position: relative;
-}
+    .footer-logo img {
+      width: 70px;
+      filter: drop-shadow(0 0 18px var(--hot));
+    }
 
-.feature::before, .event-card::before, .drink::after, .game-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(120deg, transparent, var(--hot), var(--blue), transparent);
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  opacity: .35;
-  pointer-events: none;
-  animation: borderChase 4s linear infinite;
-}
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: #d9c7e4;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+    }
 
-@keyframes borderChase {
-  0% { filter: hue-rotate(0deg); opacity:.25; }
-  50% { opacity:.8; }
-  100% { filter: hue-rotate(360deg); opacity:.25; }
-}
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all .75s ease;
+    }
 
-.drink {
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transition: .5s;
-}
+    .reveal.show {
+      opacity: 1;
+      transform: none;
+    }
 
-.drink.flipped {
-  transform: rotateY(180deg);
-}
+    .feature::before,
+    .event-card::before,
+    .drink::after,
+    .game-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(120deg, transparent, var(--hot), var(--blue), transparent);
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      -webkit-mask-composite: xor;
+      opacity: .34;
+      pointer-events: none;
+      animation: borderChase 4s linear infinite;
+      z-index: 4;
+    }
 
-.drink.flipped h3,
-.drink.flipped p {
-  transform: rotateY(180deg);
-}
+    @keyframes borderChase {
+      0% { filter: hue-rotate(0deg); opacity: .22; }
+      50% { opacity: .8; }
+      100% { filter: hue-rotate(360deg); opacity: .22; }
+    }
 
-.pick-drink {
-  margin: 0 0 24px;
-}
+    .token-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      pointer-events: none;
+      z-index: 9999;
+      box-shadow: 0 0 12px var(--gold);
+      animation: fadeToken .7s forwards;
+    }
 
-.drink.highlight {
-  outline: 3px solid var(--gold);
-  box-shadow: 0 0 40px rgba(255,209,102,.65);
-}
+    @keyframes fadeToken {
+      to { transform: scale(0); opacity: 0; }
+    }
 
-.token-dot {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  pointer-events: none;
-  z-index: 9999;
-  box-shadow: 0 0 12px var(--gold);
-  animation: fadeToken .7s forwards;
-}
+    .tilt-warning {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: clamp(80px, 18vw, 240px);
+      font-weight: 1000;
+      color: #ff2525;
+      background: rgba(0,0,0,.72);
+      z-index: 99999;
+      opacity: 0;
+      pointer-events: none;
+      text-shadow: 0 0 30px red;
+    }
 
-@keyframes fadeToken {
-  to { transform: scale(0); opacity: 0; }
-}
+    .tilt-warning.show {
+      animation: tiltFlash .65s ease;
+    }
 
-.tilt-warning {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: clamp(80px, 18vw, 240px);
-  font-weight: 1000;
-  color: #ff2525;
-  background: rgba(0,0,0,.72);
-  z-index: 99999;
-  opacity: 0;
-  pointer-events: none;
-  text-shadow: 0 0 30px red;
-}
+    @keyframes tiltFlash {
+      0%,100% { opacity: 0; }
+      20%,80% { opacity: 1; }
+    }
 
-.tilt-warning.show {
-  animation: tiltFlash .65s ease;
-}
+    body.tilt {
+      animation: shake .35s linear;
+    }
 
-@keyframes tiltFlash {
-  0%,100% { opacity: 0; }
-  20%,80% { opacity: 1; }
-}
+    @keyframes shake {
+      0%,100% { transform: translate(0); }
+      20% { transform: translate(-12px, 6px); }
+      40% { transform: translate(10px, -8px); }
+      60% { transform: translate(-8px, -5px); }
+      80% { transform: translate(9px, 5px); }
+    }
 
-body.tilt {
-  animation: shake .35s linear;
-}
+    .bo-mode-banner {
+      position: fixed;
+      top: 95px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-150px);
+      z-index: 9999;
+      padding: 16px 26px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--hot), var(--blue));
+      font-weight: 1000;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      box-shadow: 0 0 40px rgba(255,43,214,.75);
+      transition: .45s;
+      text-align: center;
+    }
 
-@keyframes shake {
-  0%,100% { transform: translate(0); }
-  20% { transform: translate(-12px, 6px); }
-  40% { transform: translate(10px, -8px); }
-  60% { transform: translate(-8px, -5px); }
-  80% { transform: translate(9px, 5px); }
-}
+    .bo-mode-banner.show {
+      transform: translateX(-50%) translateY(0);
+    }
 
-.bo-mode-banner {
-  position: fixed;
-  top: 95px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-140px);
-  z-index: 9999;
-  padding: 16px 26px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--hot), var(--blue));
-  font-weight: 1000;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  box-shadow: 0 0 40px rgba(255,43,214,.75);
-  transition: .45s;
-}
+    body.bo-mode {
+      filter: saturate(1.35) contrast(1.08);
+    }
 
-.bo-mode-banner.show {
-  transform: translateX(-50%) translateY(0);
-}
+    .secret-token {
+      position: fixed;
+      left: 18px;
+      bottom: 26px;
+      z-index: 90;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,209,102,.8);
+      background: radial-gradient(circle, #fff3a2, #f5a900);
+      color: transparent;
+      box-shadow: 0 0 18px var(--gold);
+      cursor: pointer;
+    }
 
-body.bo-mode {
-  filter: saturate(1.35) contrast(1.08);
-}
+    .bonus-message {
+      position: fixed;
+      left: 22px;
+      bottom: 62px;
+      z-index: 91;
+      background: rgba(0,0,0,.85);
+      border: 1px solid var(--gold);
+      border-radius: 20px;
+      padding: 18px;
+      color: white;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(14px);
+      transition: .3s;
+    }
 
-.secret-token {
-  position: fixed;
-  left: 18px;
-  bottom: 26px;
-  z-index: 80;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,209,102,.8);
-  background: radial-gradient(circle, #fff3a2, #f5a900);
-  color: transparent;
-  box-shadow: 0 0 18px var(--gold);
-  cursor: pointer;
-}
+    .bonus-message.show {
+      opacity: 1;
+      transform: none;
+    }
 
-.bonus-message {
-  position: fixed;
-  left: 22px;
-  bottom: 62px;
-  z-index: 90;
-  background: rgba(0,0,0,.85);
-  border: 1px solid var(--gold);
-  border-radius: 20px;
-  padding: 18px;
-  color: white;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(14px);
-  transition: .3s;
-}
+    .extra-ball {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(120px);
+      z-index: 90;
+      padding: 15px 24px;
+      border-radius: 999px;
+      border: 1px solid var(--gold);
+      background: #09020b;
+      color: var(--gold);
+      font-weight: 1000;
+      letter-spacing: .15em;
+      cursor: pointer;
+      transition: .35s;
+      box-shadow: 0 0 25px rgba(255,209,102,.45);
+      pointer-events: none;
+    }
 
-.bonus-message.show {
-  opacity: 1;
-  transform: none;
-}
+    .extra-ball.show {
+      transform: translateX(-50%) translateY(0);
+      pointer-events: all;
+    }
 
-.extra-ball {
-  position: fixed;
-  left: 50%;
-  bottom: 22px;
-  transform: translateX(-50%) translateY(120px);
-  z-index: 90;
-  padding: 15px 24px;
-  border-radius: 999px;
-  border: 1px solid var(--gold);
-  background: #09020b;
-  color: var(--gold);
-  font-weight: 1000;
-  letter-spacing: .15em;
-  cursor: pointer;
-  transition: .35s;
-  box-shadow: 0 0 25px rgba(255,209,102,.45);
-}
+    .red-door-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, rgba(255,0,70,.18), rgba(0,0,0,.95));
+      z-index: 99998;
+      display: none;
+      place-items: center;
+      pointer-events: none;
+    }
 
-.extra-ball.show {
-  transform: translateX(-50%) translateY(0);
-}
+    .red-door-overlay.show {
+      display: grid;
+      pointer-events: all;
+    }
 
-.red-door-overlay {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle, rgba(255,0,70,.18), rgba(0,0,0,.95));
-  z-index: 99998;
-  display: none;
-  place-items: center;
-}
+    .red-door {
+      width: min(320px, 80vw);
+      height: 520px;
+      background: linear-gradient(90deg, #390006, #a50021, #420006);
+      border: 8px solid #160004;
+      border-radius: 8px;
+      box-shadow: 0 0 80px rgba(255,0,80,.75);
+      position: relative;
+      animation: doorOpen .9s ease forwards;
+    }
 
-.red-door-overlay.show {
-  display: grid;
-}
+    @keyframes doorOpen {
+      from { transform: perspective(700px) rotateY(0); }
+      to { transform: perspective(700px) rotateY(-13deg); }
+    }
 
-.red-door {
-  width: min(320px, 80vw);
-  height: 520px;
-  background: linear-gradient(90deg, #390006, #a50021, #420006);
-  border: 8px solid #160004;
-  border-radius: 8px;
-  box-shadow: 0 0 80px rgba(255,0,80,.75);
-  position: relative;
-  animation: doorOpen .9s ease forwards;
-}
+    .red-door button {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid white;
+      background: black;
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+    }
 
-@keyframes doorOpen {
-  from { transform: perspective(700px) rotateY(0); }
-  to { transform: perspective(700px) rotateY(-13deg); }
-}
+    .achievement {
+      position: fixed;
+      right: 20px;
+      top: 100px;
+      z-index: 9999;
+      background: rgba(0,0,0,.86);
+      border: 1px solid var(--gold);
+      color: white;
+      padding: 16px 20px;
+      border-radius: 18px;
+      transform: translateX(140%);
+      transition: .4s;
+      box-shadow: 0 0 30px rgba(255,209,102,.35);
+    }
 
-.red-door button {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 14px 20px;
-  border-radius: 999px;
-  border: 1px solid white;
-  background: black;
-  color: white;
-  font-weight: 900;
-}
+    .achievement.show {
+      transform: translateX(0);
+    }
 
-.bo-graffiti {
-  position: absolute;
-  right: 8%;
-  bottom: 14%;
-  color: rgba(255,43,214,.28);
-  font-size: 28px;
-  font-weight: 900;
-  transform: rotate(-9deg);
-  text-shadow: 0 0 18px rgba(255,43,214,.4);
-}
+    @media (max-width: 980px) {
+      .hero-grid,
+      .split,
+      .contact-grid,
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
 
-.achievement {
-  position: fixed;
-  right: 20px;
-  top: 100px;
-  z-index: 9999;
-  background: rgba(0,0,0,.86);
-  border: 1px solid var(--gold);
-  color: white;
-  padding: 16px 20px;
-  border-radius: 18px;
-  transform: translateX(140%);
-  transition: .4s;
-  box-shadow: 0 0 30px rgba(255,209,102,.35);
-}
+      .machine-stack {
+        min-height: 500px;
+      }
 
-.achievement.show {
-  transform: translateX(0);
-}
+      .scorebar,
+      .feature-grid,
+      .menu-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .links {
+        display: none;
+      }
+
+      .menu-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .nav {
+        top: 10px;
+        border-radius: 24px;
+      }
+
+      .brand span {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 118px;
+      }
+
+      h1 {
+        font-size: 58px;
+      }
+
+      .scorebar,
+      .feature-grid,
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .machine-stack {
+        min-height: 480px;
+      }
+
+      .polaroid {
+        width: 205px;
+      }
+
+      .polaroid img {
+        height: 190px;
+      }
+
+      .p2 {
+        right: 0;
+        top: 27%;
+      }
+
+      .p3 {
+        left: 8%;
+        bottom: 6%;
+      }
+
+      .sticky-actions {
+        left: 12px;
+        right: 12px;
+        flex-direction: row;
+      }
+
+      .sticky-actions a {
+        flex: 1;
+        text-align: center;
+      }
+
+      .footer-grid {
+        display: grid;
+      }
+
+      .bo-mode-banner {
+        width: calc(100% - 28px);
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <nav class="nav">
     <a class="brand" href="#home">
-      <img src="images/pinpoint-logo.jpg" alt="Pinpoint Fayetteville logo">
+      <img src="images/logo2.avif" alt="Pinpoint Fayetteville logo">
       <span>Pinpoint</span>
     </a>
+
     <div class="links">
       <a href="#games">Games</a>
       <a href="#cocktails">Cocktails</a>
       <a href="#events">League</a>
       <a href="#visit">Visit</a>
     </div>
+
     <a class="nav-cta" href="tel:4799353298">Call</a>
   </nav>
 
@@ -788,15 +1269,28 @@ body.bo-mode {
   </div>
 
   <header class="hero" id="home">
+    <div class="plunger-wrap" aria-hidden="true">
+      <div class="plunger"></div>
+      <div class="pinball"></div>
+    </div>
+
     <div class="wrap hero-grid">
       <div>
         <div class="eyebrow">Underground on Block Street • Fayetteville, Arkansas</div>
-        <h1>Craft<br><span class="neon">Cocktails</span><br>& Pinball</h1>
+
+        <h1>
+          Craft<br>
+          <span class="neon">Cocktails</span><br>
+          & Pinball
+        </h1>
+
         <p>A neon-lit basement bar built for late-night rounds, house cocktails, local beer, tokens, tournaments, skee-ball, darts, and one more game before you leave.</p>
+
         <div class="hero-actions">
           <a class="btn" href="https://www.google.com/maps/search/?api=1&query=23+North+Block+Avenue+Fayetteville+AR" target="_blank">Find the Red Door</a>
           <a class="btn secondary" href="#games">See the Lineup</a>
         </div>
+
         <div class="scorebar">
           <div class="score"><strong>21+</strong><span>Normal Hours</span></div>
           <div class="score"><strong>Tokens</strong><span>At the Bar</span></div>
@@ -806,9 +1300,20 @@ body.bo-mode {
       </div>
 
       <div class="machine-stack">
-        <div class="polaroid p1"><img src="images/godzilla.png" alt="Godzilla pinball machine"><span>Godzilla</span></div>
-        <div class="polaroid p2"><img src="images/lord-of-the-ring.png" alt="Lord of the Rings pinball machine"><span>Lord of the Rings</span></div>
-        <div class="polaroid p3"><img src="images/harry-potter.png" alt="Harry Potter pinball machine"><span>Harry Potter</span></div>
+        <div class="polaroid p1">
+          <img src="images/godzilla.png" alt="Godzilla pinball machine">
+          <span>Godzilla</span>
+        </div>
+
+        <div class="polaroid p2">
+          <img src="images/lord-of-the-ring.png" alt="Lord of the Rings pinball machine">
+          <span>Lord of the Rings</span>
+        </div>
+
+        <div class="polaroid p3">
+          <img src="images/harry-potter.png" alt="Harry Potter pinball machine">
+          <span>Harry Potter</span>
+        </div>
       </div>
     </div>
   </header>
@@ -820,26 +1325,26 @@ body.bo-mode {
 
       <div class="feature-grid">
         <article class="feature reveal">
+          <img src="images/69732f_18f037238bc64067ae78b1e257dc5223~mv2.png" alt="Pinpoint atmosphere">
+          <div class="feature-content">
+            <h3>Arcade Glow</h3>
+            <p>Rows of machines, glowing artwork, fast rounds, and that underground Block Street feel.</p>
+          </div>
+        </article>
+
+        <article class="feature reveal">
+          <img src="images/69732f_3f570a2ff4184ab08149d03be6ee185b~mv2.png" alt="Pinpoint bar atmosphere">
+          <div class="feature-content">
+            <h3>Cocktail Bar</h3>
+            <p>Craft drinks, local beer, and house recipes built for a night that keeps moving.</p>
+          </div>
+        </article>
+
+        <article class="feature reveal">
           <img src="images/skee-ball.jpg" alt="Skee-ball at Pinpoint">
           <div class="feature-content">
             <h3>Skee-Ball</h3>
             <p>Classic arcade competition with a drink in hand and the whole table watching the last roll.</p>
-          </div>
-        </article>
-
-        <article class="feature reveal">
-          <img src="images/weekly-league-play.avif" alt="Weekly league play">
-          <div class="feature-content">
-            <h3>League Night</h3>
-            <p>Weekly matchups, fast rounds, and a room full of players chasing the next high score.</p>
-          </div>
-        </article>
-
-        <article class="feature reveal">
-          <img src="images/sunday-ranked-play.avif" alt="Sunday ranked pinball play">
-          <div class="feature-content">
-            <h3>Ranked Play</h3>
-            <p>Second Sunday IFPA tournament energy for players ready to put scores on the board.</p>
           </div>
         </article>
       </div>
@@ -856,7 +1361,7 @@ body.bo-mode {
       <div class="game-track">
         <div class="game-card"><img src="images/addams-family.png" alt="Addams Family pinball"><h4>Addams Family</h4></div>
         <div class="game-card"><img src="images/Cactus-canyon.png" alt="Cactus Canyon pinball"><h4>Cactus Canyon</h4></div>
-        <div class="game-card"><img src="images/creature-from-the-black-lagoon.png" alt="Creature from the Black Lagoon pinball"><h4>Creature</h4></div>
+        <div class="game-card"><img src="images/creature-from-the-black-lagoon.png" alt="Creature pinball"><h4>Creature</h4></div>
         <div class="game-card"><img src="images/evil-dead.png" alt="Evil Dead pinball"><h4>Evil Dead</h4></div>
         <div class="game-card"><img src="images/funhouse.png" alt="FunHouse pinball"><h4>FunHouse</h4></div>
         <div class="game-card"><img src="images/jurrasic-park.png" alt="Jurassic Park pinball"><h4>Jurassic Park</h4></div>
@@ -865,7 +1370,7 @@ body.bo-mode {
 
         <div class="game-card"><img src="images/addams-family.png" alt="Addams Family pinball"><h4>Addams Family</h4></div>
         <div class="game-card"><img src="images/Cactus-canyon.png" alt="Cactus Canyon pinball"><h4>Cactus Canyon</h4></div>
-        <div class="game-card"><img src="images/creature-from-the-black-lagoon.png" alt="Creature from the Black Lagoon pinball"><h4>Creature</h4></div>
+        <div class="game-card"><img src="images/creature-from-the-black-lagoon.png" alt="Creature pinball"><h4>Creature</h4></div>
         <div class="game-card"><img src="images/evil-dead.png" alt="Evil Dead pinball"><h4>Evil Dead</h4></div>
         <div class="game-card"><img src="images/funhouse.png" alt="FunHouse pinball"><h4>FunHouse</h4></div>
         <div class="game-card"><img src="images/jurrasic-park.png" alt="Jurassic Park pinball"><h4>Jurassic Park</h4></div>
@@ -877,16 +1382,69 @@ body.bo-mode {
 
   <section class="cocktails" id="cocktails">
     <div class="wrap">
-      <h2 class="section-title reveal">House Cocktails With Arcade Names</h2>
-      <p class="section-intro reveal">Fresh juice, premium spirits, house ingredients, local beer, and cocktails that feel right at home beside a glowing playfield.</p>
-<button class="btn pick-drink" id="pickDrink">Pick My Drink</button>
+      <div class="menu-head">
+        <div>
+          <h2 class="section-title reveal">House Cocktails With Arcade Names</h2>
+          <p class="section-intro reveal">Fresh juice, premium spirits, house ingredients, local beer, and cocktails that feel right at home beside a glowing playfield.</p>
+        </div>
+
+        <button class="btn pick-drink" id="pickDrink">Pick My Drink</button>
+      </div>
+
       <div class="menu-grid">
-        <div class="drink reveal"><h3>Cool Stachio Bro</h3><p>Mezcal, rum, pistachio, pandan, honey, lime, and egg white.</p></div>
-        <div class="drink reveal"><h3>Sucker Punch</h3><p>Crown apple, Midori, lemon, soda, and a sour powder rim.</p></div>
-        <div class="drink reveal"><h3>Red Rabbit</h3><p>400 Conejos mezcal, strawberry, lime, and balsamic.</p></div>
-        <div class="drink reveal"><h3>Two to Mango</h3><p>Salted vanilla vodka, mandarin, mango, coconut-rice orgeat, Bumbu, lime, and Thai basil.</p></div>
-        <div class="drink reveal"><h3>Pinpoint Old Fashioned</h3><p>Built with Pinpoint’s barrel pick of Jeppson’s single barrel cask strength bourbon.</p></div>
-        <div class="drink reveal"><h3>Seasonal Espresso Martini</h3><p>A rotating espresso martini built around the current house flavor.</p></div>
+        <div class="drink reveal">
+          <h3>Cool Stachio Bro</h3>
+          <p>Mezcal, rum, pistachio, pandan, honey, lime, and egg white.</p>
+          <small>Click to flip</small>
+        </div>
+
+        <div class="drink reveal">
+          <h3>Sucker Punch</h3>
+          <p>Crown apple, Midori, lemon, soda, and a sour powder rim.</p>
+          <small>Arcade sour</small>
+        </div>
+
+        <div class="drink reveal">
+          <h3>Red Rabbit</h3>
+          <p>400 Conejos mezcal, strawberry, lime, and balsamic.</p>
+          <small>Smoky bright</small>
+        </div>
+
+        <div class="drink reveal">
+          <h3>Two to Mango</h3>
+          <p>Salted vanilla vodka, mandarin, mango, coconut-rice orgeat, Bumbu, lime, and Thai basil.</p>
+          <small>Tropical round</small>
+        </div>
+
+        <div class="drink reveal">
+          <h3>Pinpoint Old Fashioned</h3>
+          <p>Built with Pinpoint’s barrel pick of Jeppson’s single barrel cask strength bourbon.</p>
+          <small>House classic</small>
+        </div>
+
+        <div class="drink reveal">
+          <h3>Espresso Martini</h3>
+          <p>A rotating espresso martini built around the current house flavor.</p>
+          <small>Late night</small>
+        </div>
+
+        <div class="drink reveal">
+          <h3>House Shot</h3>
+          <p>A quick round before the next ball drains.</p>
+          <small>One more game</small>
+        </div>
+
+        <div class="drink reveal">
+          <h3>Craft Beer</h3>
+          <p>Local and rotating taps ready for league night, tournaments, and casual rounds.</p>
+          <small>Cold pull</small>
+        </div>
+
+        <div class="drink reveal">
+          <h3>Zero Proof</h3>
+          <p>Bright, balanced non-alcoholic options with the same arcade-bar energy.</p>
+          <small>No tilt</small>
+        </div>
       </div>
     </div>
   </section>
@@ -920,12 +1478,15 @@ body.bo-mode {
 
   <section class="basement" id="story">
     <div class="bo-graffiti">Bo was here</div>
+
     <div class="wrap split">
       <div>
         <h2 class="section-title reveal">Look for the Red Door</h2>
       </div>
+
       <div class="glass-panel reveal">
         <p>Downstairs on North Block Avenue, Pinpoint brings together the best parts of an arcade, a cocktail bar, and a late-night downtown hideout. Start a tab, grab house tokens at the bar, pick a machine, and let the room take over.</p>
+
         <div class="token-row">
           <span class="token">Cocktails</span>
           <span class="token">Craft Beer</span>
@@ -944,7 +1505,7 @@ body.bo-mode {
       <p class="section-intro reveal">A downtown Fayetteville basement bar at 23 North Block Avenue. No admission fee. Games run on house tokens purchased at the bar.</p>
 
       <div class="contact-grid">
-        <div class="map reveal">
+        <div class="map-card reveal" id="mapCard">
           <div class="map-badge">
             <h3>23 North Block Avenue</h3>
             <p>Fayetteville, AR 72701<br>Look for the red door.</p>
@@ -977,6 +1538,7 @@ body.bo-mode {
           <span style="color:#bfaed0">Cocktails • Pinball • Skee-Ball • Darts</span>
         </div>
       </div>
+
       <div class="footer-links">
         <a href="#home">Home</a>
         <a href="#games">Games</a>
@@ -987,269 +1549,217 @@ body.bo-mode {
     </div>
   </footer>
 
-  <script>
-   <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('show');
-      }
-    });
-  }, { threshold: 0.14 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // Token cursor trail
-  document.addEventListener('mousemove', (e) => {
-    document.body.style.background =
-      `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(255,43,214,.16), transparent 18%),
-       radial-gradient(circle at 20% 5%, rgba(255,43,214,.28), transparent 32%),
-       radial-gradient(circle at 80% 15%, rgba(39,217,255,.22), transparent 34%),
-       radial-gradient(circle at 50% 80%, rgba(255,209,102,.12), transparent 38%),
-       #050106`;
-
-    const dot = document.createElement('div');
-    dot.className = 'token-dot';
-    dot.style.left = e.clientX + 'px';
-    dot.style.top = e.clientY + 'px';
-    document.body.appendChild(dot);
-    setTimeout(() => dot.remove(), 700);
-  });
-
-  // Drink card flip
-  document.querySelectorAll('.drink').forEach(card => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('flipped');
-    });
-  });
-
-  // Pick my drink randomizer
-  const pickDrink = document.getElementById('pickDrink');
-  const drinks = [...document.querySelectorAll('.drink')];
-
-  if (pickDrink) {
-    pickDrink.addEventListener('click', () => {
-      drinks.forEach(d => d.classList.remove('highlight'));
-      const chosen = drinks[Math.floor(Math.random() * drinks.length)];
-      chosen.classList.add('highlight');
-      chosen.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-  }
-
-  // TILT screen if button clicked too fast
-  let clickCount = 0;
-  let clickTimer;
-
-  document.querySelectorAll('.btn, .nav-cta, .sticky-actions a').forEach(btn => {
-    btn.addEventListener('click', () => {
-      clickCount++;
-      clearTimeout(clickTimer);
-
-      clickTimer = setTimeout(() => {
-        clickCount = 0;
-      }, 700);
-
-      if (clickCount >= 5) {
-        document.body.classList.add('tilt');
-        document.getElementById('tiltWarning').classList.add('show');
-
-        setTimeout(() => {
-          document.body.classList.remove('tilt');
-          document.getElementById('tiltWarning').classList.remove('show');
-          clickCount = 0;
-        }, 800);
-      }
-    });
-  });
-
-  // Konami Code = Bo Mode
-  const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  let konamiPosition = 0;
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === konami[konamiPosition]) {
-      konamiPosition++;
-      if (konamiPosition === konami.length) {
-        document.body.classList.add('bo-mode');
-        document.getElementById('boModeBanner').classList.add('show');
-        setTimeout(() => {
-          document.getElementById('boModeBanner').classList.remove('show');
-        }, 3500);
-        konamiPosition = 0;
-      }
-    } else {
-      konamiPosition = 0;
-    }
-  });
-
-  // Logo click 5 times = Basement Mode
-  let logoClicks = 0;
-  const brand = document.querySelector('.brand');
-
-  if (brand) {
-    brand.addEventListener('click', (e) => {
-      logoClicks++;
-      if (logoClicks >= 5) {
-        e.preventDefault();
-        document.body.classList.toggle('bo-mode');
-        document.getElementById('boModeBanner').textContent = 'BASEMENT MODE ACTIVE';
-        document.getElementById('boModeBanner').classList.add('show');
-        setTimeout(() => {
-          document.getElementById('boModeBanner').classList.remove('show');
-          document.getElementById('boModeBanner').textContent = 'BO MODE UNLOCKED • BONUS BALL ACTIVE';
-        }, 2600);
-        logoClicks = 0;
-      }
-    });
-  }
-
-  // Secret token = Bonus Ball
-  const secretToken = document.getElementById('secretToken');
-  const bonusMessage = document.getElementById('bonusMessage');
-
-  secretToken.addEventListener('click', () => {
-    bonusMessage.classList.toggle('show');
-  });
-
-  // Extra Ball appears near bottom
-  const extraBall = document.getElementById('extraBall');
-
-  window.addEventListener('scroll', () => {
-    const nearBottom = window.innerHeight + window.scrollY > document.body.offsetHeight - 700;
-    if (nearBottom) {
-      extraBall.classList.add('show');
-    }
-  });
-
-  extraBall.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.getElementById('boModeBanner').textContent = 'EXTRA BALL SERVED';
-    document.getElementById('boModeBanner').classList.add('show');
-    setTimeout(() => {
-      document.getElementById('boModeBanner').classList.remove('show');
-      document.getElementById('boModeBanner').textContent = 'BO MODE UNLOCKED • BONUS BALL ACTIVE';
-    }, 2400);
-  });
-
-  // Red door animation
-  const redDoorOverlay = document.getElementById('redDoorOverlay');
-  const closeDoor = document.getElementById('closeDoor');
-
-  document.querySelectorAll('a[href*="maps"], .map-badge').forEach(el => {
-    el.addEventListener('dblclick', (e) => {
-      e.preventDefault();
-      redDoorOverlay.classList.add('show');
-    });
-  });
-
-  closeDoor.addEventListener('click', () => {
-    redDoorOverlay.classList.remove('show');
-  });
-
-  // Random jackpot glow
-  setInterval(() => {
-    const buttons = [...document.querySelectorAll('.btn, .nav-cta, .sticky-actions a')];
-    const randomButton = buttons[Math.floor(Math.random() * buttons.length)];
-    randomButton.style.boxShadow = '0 0 45px rgba(255,209,102,.95), 0 0 70px rgba(255,43,214,.6)';
-    randomButton.textContent = randomButton.textContent.includes('JACKPOT') ? randomButton.textContent : randomButton.textContent + ' JACKPOT';
-
-    setTimeout(() => {
-      randomButton.style.boxShadow = '';
-      randomButton.textContent = randomButton.textContent.replace(' JACKPOT', '');
-    }, 1800);
-  }, 9000);
-
-  // Footer achievement
-  const achievement = document.createElement('div');
-  achievement.className = 'achievement';
-  achievement.innerHTML = '<strong>Achievement Unlocked</strong><br>Found the basement.';
-  document.body.appendChild(achievement);
-
-  let achievementShown = false;
-
-  window.addEventListener('scroll', () => {
-    if (!achievementShown && window.innerHeight + window.scrollY >= document.body.offsetHeight - 120) {
-      achievement.classList.add('show');
-      achievementShown = true;
-
-      setTimeout(() => {
-        achievement.classList.remove('show');
-      }, 4200);
-    }
-  });
-
-  // Hero plunger animation
-  const hero = document.querySelector('.hero');
-  const plunger = document.createElement('div');
-  plunger.style.position = 'absolute';
-  plunger.style.left = '8%';
-  plunger.style.bottom = '8%';
-  plunger.style.width = '18px';
-  plunger.style.height = '110px';
-  plunger.style.borderRadius = '999px';
-  plunger.style.background = 'linear-gradient(#ff2bd6, #27d9ff)';
-  plunger.style.boxShadow = '0 0 25px rgba(255,43,214,.7)';
-  plunger.style.zIndex = '4';
-  plunger.style.animation = 'plungerPull 2.8s infinite';
-
-  const ball = document.createElement('div');
-  ball.style.position = 'absolute';
-  ball.style.left = '9%';
-  ball.style.bottom = '17%';
-  ball.style.width = '20px';
-  ball.style.height = '20px';
-  ball.style.borderRadius = '50%';
-  ball.style.background = 'white';
-  ball.style.boxShadow = '0 0 25px white, 0 0 45px #27d9ff';
-  ball.style.zIndex = '4';
-  ball.style.animation = 'pinballLaunch 2.8s infinite';
-
-  const style = document.createElement('style');
-  style.innerHTML = `
-    @keyframes plungerPull {
-      0%, 45%, 100% { transform: translateY(0); }
-      30% { transform: translateY(38px); }
-    }
-
-    @keyframes pinballLaunch {
-      0%, 40% { transform: translate(0,0) scale(1); opacity:1; }
-      70% { transform: translate(55vw,-28vh) scale(.75); opacity:1; }
-      100% { transform: translate(68vw,-42vh) scale(.25); opacity:0; }
-    }
-  `;
-
-  document.head.appendChild(style);
-  hero.appendChild(plunger);
-  hero.appendChild(ball);
-
-  // Skee-ball mini score animation for cards
-  document.querySelectorAll('.event-card, .feature').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      card.setAttribute('data-score', ['10', '20', '30', '40', '50', 'JACKPOT'][Math.floor(Math.random() * 6)]);
-    });
-  });
-</script>
-  </script>
   <div class="tilt-warning" id="tiltWarning">TILT</div>
 
-<div class="bo-mode-banner" id="boModeBanner">
-  BO MODE UNLOCKED • BONUS BALL ACTIVE
-</div>
-
-<button class="secret-token" id="secretToken" title="Bonus Ball">●</button>
-
-<div class="bonus-message" id="bonusMessage">
-  <strong>BONUS BALL</strong><br>
-  Bo Counts says: one more game.
-</div>
-
-<button class="extra-ball" id="extraBall">EXTRA BALL</button>
-
-<div class="red-door-overlay" id="redDoorOverlay">
-  <div class="red-door">
-    <div class="door-glow"></div>
-    <button id="closeDoor">ENTER PINPOINT</button>
+  <div class="bo-mode-banner" id="boModeBanner">
+    BO MODE UNLOCKED • BONUS BALL ACTIVE
   </div>
-</div>
+
+  <button class="secret-token" id="secretToken" title="Bonus Ball">●</button>
+
+  <div class="bonus-message" id="bonusMessage">
+    <strong>BONUS BALL</strong><br>
+    Bo Counts says: one more game.
+  </div>
+
+  <button class="extra-ball" id="extraBall">EXTRA BALL</button>
+
+  <div class="red-door-overlay" id="redDoorOverlay">
+    <div class="red-door">
+      <button id="closeDoor">ENTER PINPOINT</button>
+    </div>
+  </div>
+
+  <script>
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    let lastTokenTime = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      document.body.style.background =
+        `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(255,43,214,.14), transparent 18%),
+         radial-gradient(circle at 18% 8%, rgba(255,43,214,.26), transparent 34%),
+         radial-gradient(circle at 82% 12%, rgba(40,217,255,.18), transparent 34%),
+         radial-gradient(circle at 60% 85%, rgba(255,209,102,.10), transparent 38%),
+         #050106`;
+
+      if (Date.now() - lastTokenTime < 45) return;
+      lastTokenTime = Date.now();
+
+      const dot = document.createElement('div');
+      dot.className = 'token-dot';
+      dot.style.left = e.clientX + 'px';
+      dot.style.top = e.clientY + 'px';
+      document.body.appendChild(dot);
+      setTimeout(() => dot.remove(), 700);
+    });
+
+    document.querySelectorAll('.drink').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+    });
+
+    const pickDrink = document.getElementById('pickDrink');
+    const drinks = [...document.querySelectorAll('.drink')];
+
+    if (pickDrink) {
+      pickDrink.addEventListener('click', () => {
+        drinks.forEach(d => d.classList.remove('highlight'));
+        const chosen = drinks[Math.floor(Math.random() * drinks.length)];
+        chosen.classList.add('highlight');
+        chosen.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+
+    let clickCount = 0;
+    let clickTimer;
+
+    document.querySelectorAll('.btn, .nav-cta, .sticky-actions a').forEach(btn => {
+      btn.addEventListener('click', () => {
+        clickCount++;
+        clearTimeout(clickTimer);
+
+        clickTimer = setTimeout(() => {
+          clickCount = 0;
+        }, 700);
+
+        if (clickCount >= 5) {
+          document.body.classList.add('tilt');
+          document.getElementById('tiltWarning').classList.add('show');
+
+          setTimeout(() => {
+            document.body.classList.remove('tilt');
+            document.getElementById('tiltWarning').classList.remove('show');
+            clickCount = 0;
+          }, 800);
+        }
+      });
+    });
+
+    const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let konamiPosition = 0;
+
+    document.addEventListener('keydown', (e) => {
+      const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+
+      if (key === konami[konamiPosition]) {
+        konamiPosition++;
+
+        if (konamiPosition === konami.length) {
+          document.body.classList.add('bo-mode');
+          showBanner('BO MODE UNLOCKED • BONUS BALL ACTIVE');
+          konamiPosition = 0;
+        }
+      } else {
+        konamiPosition = 0;
+      }
+    });
+
+    let logoClicks = 0;
+    const brand = document.querySelector('.brand');
+
+    if (brand) {
+      brand.addEventListener('click', (e) => {
+        logoClicks++;
+
+        if (logoClicks >= 5) {
+          e.preventDefault();
+          document.body.classList.toggle('bo-mode');
+          showBanner('BASEMENT MODE ACTIVE');
+          logoClicks = 0;
+        }
+      });
+    }
+
+    const secretToken = document.getElementById('secretToken');
+    const bonusMessage = document.getElementById('bonusMessage');
+
+    secretToken.addEventListener('click', () => {
+      bonusMessage.classList.toggle('show');
+    });
+
+    const extraBall = document.getElementById('extraBall');
+
+    window.addEventListener('scroll', () => {
+      const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 350;
+      if (nearBottom) extraBall.classList.add('show');
+    });
+
+    extraBall.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showBanner('EXTRA BALL SERVED');
+    });
+
+    const redDoorOverlay = document.getElementById('redDoorOverlay');
+    const closeDoor = document.getElementById('closeDoor');
+    const mapCard = document.getElementById('mapCard');
+
+    if (mapCard) {
+      mapCard.addEventListener('dblclick', () => {
+        redDoorOverlay.classList.add('show');
+      });
+    }
+
+    closeDoor.addEventListener('click', () => {
+      redDoorOverlay.classList.remove('show');
+    });
+
+    setInterval(() => {
+      const buttons = [...document.querySelectorAll('.btn, .nav-cta, .sticky-actions a')];
+      const randomButton = buttons[Math.floor(Math.random() * buttons.length)];
+
+      if (!randomButton.dataset.originalText) {
+        randomButton.dataset.originalText = randomButton.textContent;
+      }
+
+      randomButton.style.boxShadow = '0 0 45px rgba(255,209,102,.95), 0 0 70px rgba(255,43,214,.6)';
+      randomButton.textContent = randomButton.dataset.originalText + ' JACKPOT';
+
+      setTimeout(() => {
+        randomButton.style.boxShadow = '';
+        randomButton.textContent = randomButton.dataset.originalText;
+      }, 1600);
+    }, 9500);
+
+    const achievement = document.createElement('div');
+    achievement.className = 'achievement';
+    achievement.innerHTML = '<strong>Achievement Unlocked</strong><br>Found the basement.';
+    document.body.appendChild(achievement);
+
+    let achievementShown = false;
+
+    window.addEventListener('scroll', () => {
+      if (!achievementShown && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 140) {
+        achievement.classList.add('show');
+        achievementShown = true;
+
+        setTimeout(() => achievement.classList.remove('show'), 4200);
+      }
+    });
+
+    document.querySelectorAll('.event-card, .feature').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        const scores = ['10', '20', '30', '40', '50', 'JACKPOT'];
+        card.dataset.score = scores[Math.floor(Math.random() * scores.length)];
+      });
+    });
+
+    function showBanner(text) {
+      const banner = document.getElementById('boModeBanner');
+      banner.textContent = text;
+      banner.classList.add('show');
+
+      setTimeout(() => {
+        banner.classList.remove('show');
+        banner.textContent = 'BO MODE UNLOCKED • BONUS BALL ACTIVE';
+      }, 3000);
+    }
+  </script>
+
 </body>
 </html>
