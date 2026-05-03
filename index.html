@@ -879,7 +879,7 @@ body.bo-mode {
     <div class="wrap">
       <h2 class="section-title reveal">House Cocktails With Arcade Names</h2>
       <p class="section-intro reveal">Fresh juice, premium spirits, house ingredients, local beer, and cocktails that feel right at home beside a glowing playfield.</p>
-
+<button class="btn pick-drink" id="pickDrink">Pick My Drink</button>
       <div class="menu-grid">
         <div class="drink reveal"><h3>Cool Stachio Bro</h3><p>Mezcal, rum, pistachio, pandan, honey, lime, and egg white.</p></div>
         <div class="drink reveal"><h3>Sucker Punch</h3><p>Crown apple, Midori, lemon, soda, and a sour powder rim.</p></div>
@@ -919,6 +919,7 @@ body.bo-mode {
   </section>
 
   <section class="basement" id="story">
+    <div class="bo-graffiti">Bo was here</div>
     <div class="wrap split">
       <div>
         <h2 class="section-title reveal">Look for the Red Door</h2>
@@ -987,24 +988,247 @@ body.bo-mode {
   </footer>
 
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.14 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    document.addEventListener('mousemove', (e) => {
-      document.body.style.background =
-        `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(255,43,214,.16), transparent 18%),
-         radial-gradient(circle at 20% 5%, rgba(255,43,214,.28), transparent 32%),
-         radial-gradient(circle at 80% 15%, rgba(39,217,255,.22), transparent 34%),
-         radial-gradient(circle at 50% 80%, rgba(255,209,102,.12), transparent 38%),
-         #050106`;
+   <script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+      }
     });
+  }, { threshold: 0.14 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Token cursor trail
+  document.addEventListener('mousemove', (e) => {
+    document.body.style.background =
+      `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgba(255,43,214,.16), transparent 18%),
+       radial-gradient(circle at 20% 5%, rgba(255,43,214,.28), transparent 32%),
+       radial-gradient(circle at 80% 15%, rgba(39,217,255,.22), transparent 34%),
+       radial-gradient(circle at 50% 80%, rgba(255,209,102,.12), transparent 38%),
+       #050106`;
+
+    const dot = document.createElement('div');
+    dot.className = 'token-dot';
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+    document.body.appendChild(dot);
+    setTimeout(() => dot.remove(), 700);
+  });
+
+  // Drink card flip
+  document.querySelectorAll('.drink').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+  });
+
+  // Pick my drink randomizer
+  const pickDrink = document.getElementById('pickDrink');
+  const drinks = [...document.querySelectorAll('.drink')];
+
+  if (pickDrink) {
+    pickDrink.addEventListener('click', () => {
+      drinks.forEach(d => d.classList.remove('highlight'));
+      const chosen = drinks[Math.floor(Math.random() * drinks.length)];
+      chosen.classList.add('highlight');
+      chosen.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+
+  // TILT screen if button clicked too fast
+  let clickCount = 0;
+  let clickTimer;
+
+  document.querySelectorAll('.btn, .nav-cta, .sticky-actions a').forEach(btn => {
+    btn.addEventListener('click', () => {
+      clickCount++;
+      clearTimeout(clickTimer);
+
+      clickTimer = setTimeout(() => {
+        clickCount = 0;
+      }, 700);
+
+      if (clickCount >= 5) {
+        document.body.classList.add('tilt');
+        document.getElementById('tiltWarning').classList.add('show');
+
+        setTimeout(() => {
+          document.body.classList.remove('tilt');
+          document.getElementById('tiltWarning').classList.remove('show');
+          clickCount = 0;
+        }, 800);
+      }
+    });
+  });
+
+  // Konami Code = Bo Mode
+  const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let konamiPosition = 0;
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === konami[konamiPosition]) {
+      konamiPosition++;
+      if (konamiPosition === konami.length) {
+        document.body.classList.add('bo-mode');
+        document.getElementById('boModeBanner').classList.add('show');
+        setTimeout(() => {
+          document.getElementById('boModeBanner').classList.remove('show');
+        }, 3500);
+        konamiPosition = 0;
+      }
+    } else {
+      konamiPosition = 0;
+    }
+  });
+
+  // Logo click 5 times = Basement Mode
+  let logoClicks = 0;
+  const brand = document.querySelector('.brand');
+
+  if (brand) {
+    brand.addEventListener('click', (e) => {
+      logoClicks++;
+      if (logoClicks >= 5) {
+        e.preventDefault();
+        document.body.classList.toggle('bo-mode');
+        document.getElementById('boModeBanner').textContent = 'BASEMENT MODE ACTIVE';
+        document.getElementById('boModeBanner').classList.add('show');
+        setTimeout(() => {
+          document.getElementById('boModeBanner').classList.remove('show');
+          document.getElementById('boModeBanner').textContent = 'BO MODE UNLOCKED • BONUS BALL ACTIVE';
+        }, 2600);
+        logoClicks = 0;
+      }
+    });
+  }
+
+  // Secret token = Bonus Ball
+  const secretToken = document.getElementById('secretToken');
+  const bonusMessage = document.getElementById('bonusMessage');
+
+  secretToken.addEventListener('click', () => {
+    bonusMessage.classList.toggle('show');
+  });
+
+  // Extra Ball appears near bottom
+  const extraBall = document.getElementById('extraBall');
+
+  window.addEventListener('scroll', () => {
+    const nearBottom = window.innerHeight + window.scrollY > document.body.offsetHeight - 700;
+    if (nearBottom) {
+      extraBall.classList.add('show');
+    }
+  });
+
+  extraBall.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('boModeBanner').textContent = 'EXTRA BALL SERVED';
+    document.getElementById('boModeBanner').classList.add('show');
+    setTimeout(() => {
+      document.getElementById('boModeBanner').classList.remove('show');
+      document.getElementById('boModeBanner').textContent = 'BO MODE UNLOCKED • BONUS BALL ACTIVE';
+    }, 2400);
+  });
+
+  // Red door animation
+  const redDoorOverlay = document.getElementById('redDoorOverlay');
+  const closeDoor = document.getElementById('closeDoor');
+
+  document.querySelectorAll('a[href*="maps"], .map-badge').forEach(el => {
+    el.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+      redDoorOverlay.classList.add('show');
+    });
+  });
+
+  closeDoor.addEventListener('click', () => {
+    redDoorOverlay.classList.remove('show');
+  });
+
+  // Random jackpot glow
+  setInterval(() => {
+    const buttons = [...document.querySelectorAll('.btn, .nav-cta, .sticky-actions a')];
+    const randomButton = buttons[Math.floor(Math.random() * buttons.length)];
+    randomButton.style.boxShadow = '0 0 45px rgba(255,209,102,.95), 0 0 70px rgba(255,43,214,.6)';
+    randomButton.textContent = randomButton.textContent.includes('JACKPOT') ? randomButton.textContent : randomButton.textContent + ' JACKPOT';
+
+    setTimeout(() => {
+      randomButton.style.boxShadow = '';
+      randomButton.textContent = randomButton.textContent.replace(' JACKPOT', '');
+    }, 1800);
+  }, 9000);
+
+  // Footer achievement
+  const achievement = document.createElement('div');
+  achievement.className = 'achievement';
+  achievement.innerHTML = '<strong>Achievement Unlocked</strong><br>Found the basement.';
+  document.body.appendChild(achievement);
+
+  let achievementShown = false;
+
+  window.addEventListener('scroll', () => {
+    if (!achievementShown && window.innerHeight + window.scrollY >= document.body.offsetHeight - 120) {
+      achievement.classList.add('show');
+      achievementShown = true;
+
+      setTimeout(() => {
+        achievement.classList.remove('show');
+      }, 4200);
+    }
+  });
+
+  // Hero plunger animation
+  const hero = document.querySelector('.hero');
+  const plunger = document.createElement('div');
+  plunger.style.position = 'absolute';
+  plunger.style.left = '8%';
+  plunger.style.bottom = '8%';
+  plunger.style.width = '18px';
+  plunger.style.height = '110px';
+  plunger.style.borderRadius = '999px';
+  plunger.style.background = 'linear-gradient(#ff2bd6, #27d9ff)';
+  plunger.style.boxShadow = '0 0 25px rgba(255,43,214,.7)';
+  plunger.style.zIndex = '4';
+  plunger.style.animation = 'plungerPull 2.8s infinite';
+
+  const ball = document.createElement('div');
+  ball.style.position = 'absolute';
+  ball.style.left = '9%';
+  ball.style.bottom = '17%';
+  ball.style.width = '20px';
+  ball.style.height = '20px';
+  ball.style.borderRadius = '50%';
+  ball.style.background = 'white';
+  ball.style.boxShadow = '0 0 25px white, 0 0 45px #27d9ff';
+  ball.style.zIndex = '4';
+  ball.style.animation = 'pinballLaunch 2.8s infinite';
+
+  const style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes plungerPull {
+      0%, 45%, 100% { transform: translateY(0); }
+      30% { transform: translateY(38px); }
+    }
+
+    @keyframes pinballLaunch {
+      0%, 40% { transform: translate(0,0) scale(1); opacity:1; }
+      70% { transform: translate(55vw,-28vh) scale(.75); opacity:1; }
+      100% { transform: translate(68vw,-42vh) scale(.25); opacity:0; }
+    }
+  `;
+
+  document.head.appendChild(style);
+  hero.appendChild(plunger);
+  hero.appendChild(ball);
+
+  // Skee-ball mini score animation for cards
+  document.querySelectorAll('.event-card, .feature').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.setAttribute('data-score', ['10', '20', '30', '40', '50', 'JACKPOT'][Math.floor(Math.random() * 6)]);
+    });
+  });
+</script>
   </script>
   <div class="tilt-warning" id="tiltWarning">TILT</div>
 
